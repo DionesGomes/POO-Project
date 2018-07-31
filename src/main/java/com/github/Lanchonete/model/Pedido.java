@@ -26,15 +26,16 @@ public class Pedido implements Serializable {
         this.subTotal = produto.getPreco();
         this.quantidade = quantidade;
         this.produto = produto;        
-        data = LocalDate.now();
-        hora = LocalTime.now();
-        numeroPedido = ++id;       /*Incrementa o número do pedido*/
-         status = false;
+        this.data = LocalDate.now();
+        this.hora = LocalTime.now();
+        this.numeroPedido = ++id;       /*Incrementa o número do pedido*/
+        this.status = false;
+        this.mesa = mesa;
         
     } 
 
     /*Getters e Setters*/
-    
+
     public int getNumeroPedido() {
         return numeroPedido;
     }
@@ -43,12 +44,12 @@ public class Pedido implements Serializable {
         this.numeroPedido = numeroPedido;
     }
 
-    public float getsubTotal() {
+    public float getSubTotal() {
         return subTotal;
     }
 
-    public void setValorTotal(float valorTotal) {
-        this.subTotal = valorTotal;
+    public void setSubTotal(float subTotal) {
+        this.subTotal = subTotal;
     }
 
     public Produto getProduto() {
@@ -106,6 +107,10 @@ public class Pedido implements Serializable {
     public void setMesa(int mesa) {
         this.mesa = mesa;
     }
+    
+    
+    
+    
 
     @Override
     public int hashCode() {
