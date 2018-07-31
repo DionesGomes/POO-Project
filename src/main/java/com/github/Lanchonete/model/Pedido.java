@@ -1,16 +1,17 @@
 
 package main.java.com.github.Lanchonete.model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
 
 
-public class Pedido {
+public class Pedido implements Serializable {
     
    
    private int numeroPedido; 
-   private float valorTotal; /*Sobtotal da comanda*/
+   private float subTotal; /*Sobtotal da comanda*/
    private Produto produto; //típo produto.
    private int quantidade;
    private boolean status; /*Status do pedido, se foi atendido ou não*/
@@ -22,7 +23,7 @@ public class Pedido {
     /*Construtor com apenas Quantidade e Produto*/
    
     public Pedido(int quantidade, Produto produto) { 
-        this.valorTotal = produto.getPreco();
+        this.subTotal = produto.getPreco();
         this.quantidade = quantidade;
         this.produto = produto;        
         data = LocalDate.now();
@@ -42,12 +43,12 @@ public class Pedido {
         this.numeroPedido = numeroPedido;
     }
 
-    public float getValorTotal() {
-        return valorTotal;
+    public float getsubTotal() {
+        return subTotal;
     }
 
     public void setValorTotal(float valorTotal) {
-        this.valorTotal = valorTotal;
+        this.subTotal = valorTotal;
     }
 
     public Produto getProduto() {
@@ -127,7 +128,7 @@ public class Pedido {
         if (this.numeroPedido != other.numeroPedido) {
             return false;
         }
-        if (Float.floatToIntBits(this.valorTotal) != Float.floatToIntBits(other.valorTotal)) {
+        if (Float.floatToIntBits(this.subTotal) != Float.floatToIntBits(other.subTotal)) {
             return false;
         }
         if (this.quantidade != other.quantidade) {
@@ -153,7 +154,7 @@ public class Pedido {
 
     @Override
     public String toString() {
-        return "Pedido{" + "numeroPedido=" + numeroPedido + ", valorTotal=" + valorTotal + ", produto=" +
+        return "Pedido{" + "numeroPedido=" + numeroPedido + ", valorTotal=" + subTotal + ", produto=" +
                 produto + ", quantidade=" + quantidade + ", status=" + status + ", data=" + data + ", hora=" +
                 hora + ", mesa=" + mesa + '}';
     }
