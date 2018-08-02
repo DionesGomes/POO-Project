@@ -17,11 +17,13 @@ public class Comanda {
     private static int id;   
 
     
-
+    /*construtror*/
     public List<Pedido> getComanda() {
         return comanda;
     }
+    
 
+    /*Getters e Setters*/
     public void setComanda(List<Pedido> comanda) {
         this.comanda = comanda;
     }

@@ -4,7 +4,7 @@ package main.java.com.github.Lanchonete.model;
 
 public enum Setor {
     
-    /*Parametros que destingue o setor dos usuários*/
+    /*Parametros que destingue o setor de cada usuário*/
     
     GARCOM("GARÇOM"), CAIXA("CAIXA"), COZINHA("COZINHA"), GERENCIA("GERÊNCIA");
     /*OBS: Caso o parametro passado não bata com as opçõe acima, uma exceção e gerada*/ 

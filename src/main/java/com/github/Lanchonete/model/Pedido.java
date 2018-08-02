@@ -9,21 +9,19 @@ import java.util.Objects;
 public class Pedido implements Serializable {
     
    
-   private int numeroPedido;            /*Número referente ao pedido*/
-   private Produto produto; /*Requisito da Classe*/
-   private int quantidade;  /*Requisito da Classe*/
-   private boolean status;              /*Atendido ou não Atendido*/
-   private LocalDate data;  /*Requisito da Classe*/
-   private LocalTime hora;  /*Requisito da Classe*/
-   private static int id;              /*Incremento para número do pedido*/
-   private int mesa;        /*Requisito da Classe*/
+   private int numeroPedido;     /*Número referente ao pedido*/
+   private Produto produto;      /*Requisito da Classe*/
+   private int quantidade;       /*Requisito da Classe*/
+   private boolean status;       /*Atendido ou não Atendido*/
+   private LocalDate data;       /*Requisito da Classe*/
+   private LocalTime hora;       /*Requisito da Classe*/
+   private static int id;        /*Incremento para número do pedido*/
+   private int mesa;             /*Requisito da Classe*/
 
    
     /*Construtor*/
-
     public Pedido(int numeroPedido, float subTotal, Produto produto, int quantidade, boolean status, LocalDate data, LocalTime hora, int mesa) {
         this.numeroPedido = ++id;     /*Incrementa o número do pedido*/
-        //this.subTotal = subTotal;
         this.produto = produto;
         this.quantidade = quantidade;
         this.status = status;
@@ -33,7 +31,6 @@ public class Pedido implements Serializable {
     }
 
     /*Getters e Setters*/
-
     public int getNumeroPedido() {
         return numeroPedido;
     }

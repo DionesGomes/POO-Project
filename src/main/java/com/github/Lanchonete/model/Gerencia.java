@@ -53,8 +53,6 @@ public class Gerencia {
     @Override
     public String toString() {
         return "Gerencia{" + "comandasFechadas=" + comandasFechadas + '}';
-    }
-    
-    
+    }  
 
 }

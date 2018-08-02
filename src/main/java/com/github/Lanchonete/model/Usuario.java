@@ -16,7 +16,6 @@ public class Usuario implements Serializable {
      private String senha;
      
     /*Contrutor*/
-
     public Usuario(String cpf, String nome, String email, String telefone, LocalDate nascimento, String setor, String senha) {
         this.cpf = cpf;
         this.nome = nome;
@@ -28,7 +27,6 @@ public class Usuario implements Serializable {
     }
     
     /*Getters e Setters*/
-
     public String getCpf() {
         return cpf;
     }
@@ -139,11 +137,5 @@ public class Usuario implements Serializable {
         return "Usuario{" + "cpf=" + cpf + ", nome=" + nome + ", email=" + email + ", telefone=" +
                 telefone + ", nascimento=" + nascimento + ", setor=" + setor + ", senha=" + senha + '}';
     }
-
-    
-        
-
-    
-    
 
 }

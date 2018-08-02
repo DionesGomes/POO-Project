@@ -9,11 +9,13 @@ public class Cozinha {
     
     /*Atender os Pedidos*/
     private List<Pedido> pedidos;
-
+    
+    /*Construtor*/
     public Cozinha(List<Pedido> pedidos) {
         this.pedidos = new ArrayList<>();
     }
 
+    /*Getters e Setters*/
     public List<Pedido> getPedidos() {
         return pedidos;
     }

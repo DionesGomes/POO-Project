@@ -8,7 +8,7 @@ import java.util.Objects;
 
 public class GerenciaMesa {
 
-    private List<Comanda> comanda; /*Lista de Comandas*/
+    private List<Comanda> comanda; /*Lista com as  Comandas*/
 
     /*Construtor*/
     public GerenciaMesa(List<Comanda> comanda) {

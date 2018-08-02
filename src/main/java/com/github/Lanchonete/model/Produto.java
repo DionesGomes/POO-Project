@@ -10,6 +10,7 @@ public class Produto {
     private String descricao;
     private float preco;
 
+    /*Construtor*/
     public Produto(int codigo, String nome, String descricao, float preco) {
         this.codigo = codigo;
         this.nome = nome;
@@ -17,6 +18,7 @@ public class Produto {
         this.preco = preco;
     }
 
+    /*Getters e Setters*/
     public int getCodigo() {
         return codigo;
     }
@@ -91,10 +93,5 @@ public class Produto {
         return "Produto{" + "codigo=" + codigo + ", nome=" + nome +
                 ", descricao=" + descricao + ", preco=" + preco + '}';
     }
-    
-    
-    
-    
-    
-    
+        
 }

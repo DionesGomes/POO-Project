@@ -12,10 +12,7 @@ import main.java.com.github.Lanchonete.model.Usuario;
  */
 public class App {
     
-    public static void main(String[] args){
-        
-         
-        
+    public static void main(String[] args){        
         
     }
     
