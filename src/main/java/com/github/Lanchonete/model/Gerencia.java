@@ -9,13 +9,13 @@ import java.util.Objects;
 
 public class Gerencia {
     
-    private List<Comanda> comandasFechadas; /*Todas a comandas fechadas*/    
+    /*Gerenciar as Comandas fechadas*/    
+    private List<Comanda> comandasFechadas;     
 
     public Gerencia(List<Comanda> comandasFechadas) {
         this.comandasFechadas = new ArrayList<>();/*inicializar*/      
     }    
-    /*Criar um metodo para percorrer a lista de comandas dentro do periodo determindado*/
-
+    
     /*Getters e Setters*/
     public List<Comanda> getComandasFechadas() {
         return comandasFechadas;

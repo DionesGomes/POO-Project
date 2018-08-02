@@ -1,4 +1,3 @@
-
 package main.java.com.github.Lanchonete.model;
 
 import java.util.Objects;

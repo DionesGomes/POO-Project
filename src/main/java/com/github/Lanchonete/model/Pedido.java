@@ -1,4 +1,3 @@
-
 package main.java.com.github.Lanchonete.model;
 
 import java.io.Serializable;
@@ -10,29 +9,28 @@ import java.util.Objects;
 public class Pedido implements Serializable {
     
    
-   private int numeroPedido; 
-   private float subTotal; /*Sobtotal da comanda*/
-   private Produto produto; //típo produto.
-   private int quantidade;
-   private boolean status; /*Status do pedido, se foi atendido ou não*/
-   private LocalDate data; 
-   private LocalTime hora;  
-   private static int id;
-   private int mesa;   
+   private int numeroPedido;            /*Número referente ao pedido*/
+   private Produto produto; /*Requisito da Classe*/
+   private int quantidade;  /*Requisito da Classe*/
+   private boolean status;              /*Atendido ou não Atendido*/
+   private LocalDate data;  /*Requisito da Classe*/
+   private LocalTime hora;  /*Requisito da Classe*/
+   private static int id;              /*Incremento para número do pedido*/
+   private int mesa;        /*Requisito da Classe*/
 
-    /*Construtor com apenas Quantidade e Produto*/
    
-    public Pedido(int quantidade, Produto produto) { 
-        this.subTotal = produto.getPreco();
+    /*Construtor*/
+
+    public Pedido(int numeroPedido, float subTotal, Produto produto, int quantidade, boolean status, LocalDate data, LocalTime hora, int mesa) {
+        this.numeroPedido = ++id;     /*Incrementa o número do pedido*/
+        //this.subTotal = subTotal;
+        this.produto = produto;
         this.quantidade = quantidade;
-        this.produto = produto;        
-        this.data = LocalDate.now();
-        this.hora = LocalTime.now();
-        this.numeroPedido = ++id;       /*Incrementa o número do pedido*/
-        this.status = false;
+        this.status = status;
+        this.data = data;
+        this.hora = hora;
         this.mesa = mesa;
-        
-    } 
+    }
 
     /*Getters e Setters*/
 
@@ -42,14 +40,6 @@ public class Pedido implements Serializable {
 
     public void setNumeroPedido(int numeroPedido) {
         this.numeroPedido = numeroPedido;
-    }
-
-    public float getSubTotal() {
-        return subTotal;
-    }
-
-    public void setSubTotal(float subTotal) {
-        this.subTotal = subTotal;
     }
 
     public Produto getProduto() {
@@ -107,14 +97,17 @@ public class Pedido implements Serializable {
     public void setMesa(int mesa) {
         this.mesa = mesa;
     }
-    
-    
-    
-    
 
     @Override
     public int hashCode() {
-        int hash = 5;
+        int hash = 7;
+        hash = 97 * hash + this.numeroPedido;
+        hash = 97 * hash + Objects.hashCode(this.produto);
+        hash = 97 * hash + this.quantidade;
+        hash = 97 * hash + (this.status ? 1 : 0);
+        hash = 97 * hash + Objects.hashCode(this.data);
+        hash = 97 * hash + Objects.hashCode(this.hora);
+        hash = 97 * hash + this.mesa;
         return hash;
     }
 
@@ -131,9 +124,6 @@ public class Pedido implements Serializable {
         }
         final Pedido other = (Pedido) obj;
         if (this.numeroPedido != other.numeroPedido) {
-            return false;
-        }
-        if (Float.floatToIntBits(this.subTotal) != Float.floatToIntBits(other.subTotal)) {
             return false;
         }
         if (this.quantidade != other.quantidade) {
@@ -159,10 +149,14 @@ public class Pedido implements Serializable {
 
     @Override
     public String toString() {
-        return "Pedido{" + "numeroPedido=" + numeroPedido + ", valorTotal=" + subTotal + ", produto=" +
-                produto + ", quantidade=" + quantidade + ", status=" + status + ", data=" + data + ", hora=" +
-                hora + ", mesa=" + mesa + '}';
+        return "Pedido{" + "numeroPedido=" + numeroPedido + ", produto=" + produto + ", quantidade=" +
+                quantidade + ", status=" + status + ", data=" + data + ", hora=" + hora + ", mesa=" + mesa + '}';
     }
-   
+    
+    /*Método para retornar o total*/
+    public float getValorTotal(){
+           return  produto.getPreco() * quantidade;
+            
+    }
     
 }

@@ -8,11 +8,11 @@ import java.util.Objects;
 
 public class GerenciaMesa {
 
-    private List<Comanda> comanda;
+    private List<Comanda> comanda; /*Lista de Comandas*/
 
     /*Construtor*/
     public GerenciaMesa(List<Comanda> comanda) {
-        this.comanda = new ArrayList<>(); /*Inicializar*/
+        this.comanda = new ArrayList<>(); 
   
     }  
 

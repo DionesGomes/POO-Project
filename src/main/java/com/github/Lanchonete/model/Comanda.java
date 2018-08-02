@@ -8,17 +8,15 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class Comanda {  
+public class Comanda { 
     
+    /*Criar Comanda*/
     private List<Pedido> comanda;
-    private LocalDate data;    
-    private int numeroMesa;
+    private LocalDate data; /*Tada da comanda*/   
+    private int mesa;
     private static int id;   
 
-    public Comanda(int mesa) {
-        numeroMesa = ++id;
-        comanda = new ArrayList<>();
-    }
+    
 
     public List<Pedido> getComanda() {
         return comanda;
@@ -28,12 +26,12 @@ public class Comanda {
         this.comanda = comanda;
     }
 
-    public int getNumeroMesa() {
-        return numeroMesa;
+    public int getMesa() {
+        return mesa;
     }
 
-    public void setNumeroMesa(int numeroMesa) {
-        this.numeroMesa = numeroMesa;
+    public void setMesa(int Mesa) {
+        this.mesa = Mesa;
     }
 
     public static int getId() {
@@ -48,7 +46,7 @@ public class Comanda {
     public int hashCode() {
         int hash = 3;
         hash = 41 * hash + Objects.hashCode(this.comanda);
-        hash = 41 * hash + this.numeroMesa;
+        hash = 41 * hash + this.mesa;
         return hash;
     }
 
@@ -64,7 +62,7 @@ public class Comanda {
             return false;
         }
         final Comanda other = (Comanda) obj;
-        if (this.numeroMesa != other.numeroMesa) {
+        if (this.mesa != other.mesa) {
             return false;
         }
         if (!Objects.equals(this.comanda, other.comanda)) {
@@ -72,9 +70,5 @@ public class Comanda {
         }
         return true;
     }
-
-    
-
-    
       
 }

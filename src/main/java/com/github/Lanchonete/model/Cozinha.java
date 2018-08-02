@@ -1,4 +1,3 @@
-
 package main.java.com.github.Lanchonete.model;
 
 import java.util.ArrayList;
@@ -8,6 +7,7 @@ import java.util.Objects;
 
 public class Cozinha {
     
+    /*Atender os Pedidos*/
     private List<Pedido> pedidos;
 
     public Cozinha(List<Pedido> pedidos) {
@@ -50,9 +50,6 @@ public class Cozinha {
     @Override
     public String toString() {
         return "Cozinha{" + "pedidos=" + pedidos + '}';
-    }
-    
-    
-    
+    }  
     
 }

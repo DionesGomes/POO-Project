@@ -12,19 +12,19 @@ public class Usuario implements Serializable {
      private String email;
      private String telefone;
      private LocalDate nascimento;
-     private String senha;
      private String setor;
-      
-
+     private String senha;
+     
     /*Contrutor*/
-    public Usuario(String cpf, String nome, String email, String telefone, LocalDate nascimento, String senha, String setor) {
+
+    public Usuario(String cpf, String nome, String email, String telefone, LocalDate nascimento, String setor, String senha) {
         this.cpf = cpf;
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
         this.nascimento = nascimento;
-        this.senha = senha;
         this.setor = setor.valueOf(setor);
+        this.senha = senha;
     }
     
     /*Getters e Setters*/
@@ -67,7 +67,15 @@ public class Usuario implements Serializable {
 
     public void setNascimento(LocalDate nascimento) {
         this.nascimento = nascimento;
-    }    
+    }
+
+    public String getSetor() {
+        return setor;
+    }
+
+    public void setSetor(String setor) {
+        this.setor = setor;
+    }
 
     public String getSenha() {
         return senha;
@@ -75,31 +83,18 @@ public class Usuario implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    } 
-
-    public String getSetor() {
-        return setor;
-    }
-
-    public void setSetor(String setor) {
-        this.setor = setor.valueOf(setor);
-    } 
-
-    @Override
-    public String toString() {
-        return "Usuario{" + "cpf=" + cpf + ", nome=" + nome + ", email=" + email + ", telefone=" + telefone + ", nascimento=" + nascimento + ", senha=" + senha + ", setor=" + setor + '}';
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 23 * hash + Objects.hashCode(this.cpf);
-        hash = 23 * hash + Objects.hashCode(this.nome);
-        hash = 23 * hash + Objects.hashCode(this.email);
-        hash = 23 * hash + Objects.hashCode(this.telefone);
-        hash = 23 * hash + Objects.hashCode(this.nascimento);
-        hash = 23 * hash + Objects.hashCode(this.senha);
-        hash = 23 * hash + Objects.hashCode(this.setor);
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.cpf);
+        hash = 37 * hash + Objects.hashCode(this.nome);
+        hash = 37 * hash + Objects.hashCode(this.email);
+        hash = 37 * hash + Objects.hashCode(this.telefone);
+        hash = 37 * hash + Objects.hashCode(this.nascimento);
+        hash = 37 * hash + Objects.hashCode(this.setor);
+        hash = 37 * hash + Objects.hashCode(this.senha);
         return hash;
     }
 
@@ -127,10 +122,10 @@ public class Usuario implements Serializable {
         if (!Objects.equals(this.telefone, other.telefone)) {
             return false;
         }
-        if (!Objects.equals(this.senha, other.senha)) {
+        if (!Objects.equals(this.setor, other.setor)) {
             return false;
         }
-        if (!Objects.equals(this.setor, other.setor)) {
+        if (!Objects.equals(this.senha, other.senha)) {
             return false;
         }
         if (!Objects.equals(this.nascimento, other.nascimento)) {
@@ -138,6 +133,17 @@ public class Usuario implements Serializable {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "cpf=" + cpf + ", nome=" + nome + ", email=" + email + ", telefone=" +
+                telefone + ", nascimento=" + nascimento + ", setor=" + setor + ", senha=" + senha + '}';
+    }
+
+    
+        
+
     
     
+
 }
