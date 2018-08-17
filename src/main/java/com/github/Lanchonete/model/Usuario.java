@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Usuario implements Serializable {
+public class Usuario implements Comparable<Usuario>, Serializable {
     
      private String cpf;
      private String nome;
@@ -137,5 +137,15 @@ public class Usuario implements Serializable {
         return "Usuario{" + "cpf=" + cpf + ", nome=" + nome + ", email=" + email + ", telefone=" +
                 telefone + ", nascimento=" + nascimento + ", setor=" + setor + ", senha=" + senha + '}';
     }
+
+    @Override
+    public int compareTo(Usuario o) {
+        throw new UnsupportedOperationException("Not supported yet."); 
+    }
+
+   
+
+    
+        
 
 }
