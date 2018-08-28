@@ -5,29 +5,25 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
 
-
-public class Pedido implements Serializable {
-    
+public class Pedido implements Serializable {    
    
-   private int numeroPedido;     /*Número referente ao pedido*/
-   private Produto produto;      /*Requisito da Classe*/
-   private int quantidade;       /*Requisito da Classe*/
-   private boolean status;       /*Atendido ou não Atendido*/
-   private LocalDate data;       /*Requisito da Classe*/
-   private LocalTime hora;       /*Requisito da Classe*/
-   private static int id;        /*Incremento para número do pedido*/
-   private int mesa;             /*Requisito da Classe*/
-
+   private int numeroPedido;     
+   private Produto produto;      
+   private int quantidade;       
+   private boolean status;       
+   private final LocalDate data;       
+   private final LocalTime hora;    
+   private static int id;        
+   private int mesa;
    
     /*Construtor*/
-    public Pedido(int numeroPedido, float subTotal, Produto produto, int quantidade, boolean status, LocalDate data, LocalTime hora, int mesa) {
-        this.numeroPedido = ++id;     /*Incrementa o número do pedido*/
+    public Pedido(Produto produto, int quantidade) {            
         this.produto = produto;
-        this.quantidade = quantidade;
-        this.status = status;
-        this.data = data;
-        this.hora = hora;
-        this.mesa = mesa;
+        this.quantidade = quantidade;        
+        data = LocalDate.now();
+        hora = LocalTime.now();
+        numeroPedido = ++id;  /*Incrementa o número do pedido*/
+        status = false;
     }
 
     /*Getters e Setters*/
@@ -35,58 +31,26 @@ public class Pedido implements Serializable {
         return numeroPedido;
     }
 
-    public void setNumeroPedido(int numeroPedido) {
-        this.numeroPedido = numeroPedido;
+    public void setNumeroPedido(int i) { //Refere-se a um número de um  pedido específico.
+        numeroPedido = i;
+    }
+    
+    public static int getContPedidos(){
+        return id; 
     }
 
-    public Produto getProduto() {
-        return produto;
+    public static void setContPedidos(int i){ //Refere-se ao contador dos pedidos.
+        id = i;
     }
-
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
+        
     public boolean isStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public void AlterarStatus() {
+        status = true;
     }
-
-    public LocalDate getData() {
-        return data;
-    }
-
-    public void setData(LocalDate data) {
-        this.data = data;
-    }
-
-    public LocalTime getHora() {
-        return hora;
-    }
-
-    public void setHora(LocalTime hora) {
-        this.hora = hora;
-    }
-
-    public static int getId() {
-        return id;
-    }
-
-    public static void setId(int id) {
-        Pedido.id = id;
-    }
-
+    
     public int getMesa() {
         return mesa;
     }
@@ -94,66 +58,26 @@ public class Pedido implements Serializable {
     public void setMesa(int mesa) {
         this.mesa = mesa;
     }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + this.numeroPedido;
-        hash = 97 * hash + Objects.hashCode(this.produto);
-        hash = 97 * hash + this.quantidade;
-        hash = 97 * hash + (this.status ? 1 : 0);
-        hash = 97 * hash + Objects.hashCode(this.data);
-        hash = 97 * hash + Objects.hashCode(this.hora);
-        hash = 97 * hash + this.mesa;
-        return hash;
+    
+    public LocalDate getData(){
+        return data;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Pedido other = (Pedido) obj;
-        if (this.numeroPedido != other.numeroPedido) {
-            return false;
-        }
-        if (this.quantidade != other.quantidade) {
-            return false;
-        }
-        if (this.status != other.status) {
-            return false;
-        }
-        if (this.mesa != other.mesa) {
-            return false;
-        }
-        if (!Objects.equals(this.produto, other.produto)) {
-            return false;
-        }
-        if (!Objects.equals(this.data, other.data)) {
-            return false;
-        }
-        if (!Objects.equals(this.hora, other.hora)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Pedido{" + "numeroPedido=" + numeroPedido + ", produto=" + produto + ", quantidade=" +
-                quantidade + ", status=" + status + ", data=" + data + ", hora=" + hora + ", mesa=" + mesa + '}';
+    
+    public LocalTime getHora(){
+        return hora;
     }
     
     /*Método para retornar o total*/
+    /*Efetua a multiplicação do preço unitário dos produtos por cada produto pedido.*/
     public float getValorTotal(){
            return  produto.getPreco() * quantidade;
             
     }
     
+    @Override
+    public String toString() {
+		String s = isStatus()? "Atendido" : "Não Atendido";
+		return quantidade + " <-> " + produto.getNome() + " -> Subtotal: " + getValorTotal()+
+                " -- n°:" + getNumeroPedido() + " ==> " +s+ "\n";
+    }    
 }

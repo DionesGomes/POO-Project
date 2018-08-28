@@ -6,14 +6,12 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class Produto implements CadastroProduto, Serializable{
+public class Produto implements Serializable{
     
     private int codigo;
     private String nome;
     private String descricao;
     private float preco;
-    
-    List<Produto> produtos = new ArrayList<>(); //Array com os produtos.
     
     /*Construtor*/
     public Produto(int codigo, String nome, String descricao, float preco) {
@@ -98,27 +96,5 @@ public class Produto implements CadastroProduto, Serializable{
         return "Produto{" + "codigo=" + codigo + ", nome=" + nome +
                 ", descricao=" + descricao + ", preco=" + preco + '}';
     }
-
-    /*CRUD produtos*/
-    
-    @Override
-    public boolean cadastrarProdutos(Produto produto) {
-        return true;
-    }
-
-    @Override
-    public boolean excluirProdutos(int codigo) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    @Override
-    public List<Produto> listarProdutos() {        
-       return null;
-    }
-
-    @Override
-    public boolean alterarProdutos(Produto produto) {
-        throw new UnsupportedOperationException("Not supported yet."); 
-    }
-        
+       
 }

@@ -141,11 +141,6 @@ public class Usuario implements Comparable<Usuario>, Serializable {
     @Override
     public int compareTo(Usuario o) {
         throw new UnsupportedOperationException("Not supported yet."); 
-    }
-
-   
-
-    
-        
+    }        
 
 }
