@@ -26,7 +26,7 @@ public class Cozinha {
     }
 
     /*Método para buscar pedido pelo número*/
-    int buscar(int numeroPedido) {
+    public int buscar(int numeroPedido) {
         if (!pedidos.isEmpty()) {
             for (int i = 0; i < pedidos.size(); i++) {
                 if (pedidos.get(i).getNumeroPedido() == numeroPedido) {
