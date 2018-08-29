@@ -4,56 +4,36 @@ package main.java.com.github.Lanchonete.controller;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 import main.java.com.github.Lanchonete.model.Comanda;
 
 
-public class Gerencia {
+public class Gerencia {    
+       
+    private static List<Comanda> gerenciaComanda = new ArrayList<>();    
     
-    /*Gerenciar as Comandas fechadas*/    
-    private List<Comanda> comandasFechadas;     
-
-    public Gerencia(List<Comanda> comandasFechadas) {
-        this.comandasFechadas = new ArrayList<>();/*inicializar*/      
-    }    
-    
-    /*Getters e Setters*/
-    public List<Comanda> getComandasFechadas() {
-        return comandasFechadas;
-    }
-
-    public void setComandasFechadas(List<Comanda> comandasFechadas) {
-        this.comandasFechadas = comandasFechadas;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 31 * hash + Objects.hashCode(this.comandasFechadas);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Gerencia other = (Gerencia) obj;
-        if (!Objects.equals(this.comandasFechadas, other.comandasFechadas)) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "Gerencia{" + "comandasFechadas=" + comandasFechadas + '}';
-    }  
-
+        /*Adicioanar comanda para poder gerenciá-la*/
+	public static boolean adicionarComanda(Comanda d) {//esta função é usada somente por GerenciaMesa 
+		return gerenciaComanda.add(d);
+	}
+        /*Lista as comandas em um determinado periodo de tempo*/
+	public static String listarComandas(LocalDate inicio, LocalDate fim) {
+		String s = "";
+		for(Comanda comanda : gerenciaComanda) {
+			if(comanda.getData().isAfter(inicio.plusDays(-1)) && comanda.getData().isBefore(fim.plusDays(1))) {// se a data de uma comanda c qualquer for depois de "inicio-1" e antes de "fim+1" ela é concatenada como String
+				s+=comanda.toString();
+			}
+		}
+		return s;
+	}
+        /*Calcula o lucro total de uma comanda*/
+	public static float CalculaLucroTotal(LocalDate inicio, LocalDate fim) {
+		float lucro = 0f;
+		for(Comanda comanda : gerenciaComanda) {
+			if(comanda.getData().isAfter(inicio.plusDays(-1)) && comanda.getData().isBefore(fim.plusDays(1))) {
+				lucro+=comanda.valorTotal();
+			}
+		}
+		return lucro;
+	}
 }
