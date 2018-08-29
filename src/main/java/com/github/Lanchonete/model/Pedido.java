@@ -26,6 +26,16 @@ public class Pedido implements Serializable {
     }
 
     /*Getters e Setters*/
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+    
+    
     public int getNumeroPedido() {
         return numeroPedido;
     }
@@ -70,6 +80,8 @@ public class Pedido implements Serializable {
     public float getValorTotal(){
            return  produto.getPreco() * quantidade;            
     }
+    
+    
     
     @Override
     public String toString() {
