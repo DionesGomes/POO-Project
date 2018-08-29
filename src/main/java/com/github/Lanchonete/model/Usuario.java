@@ -12,17 +12,17 @@ public class Usuario implements Comparable<Usuario>, Serializable {
      private String email;
      private String telefone;
      private LocalDate nascimento;
-     private String setor;
+     private Setor setor;
      private String senha;
      
     /*Contrutor*/
-    public Usuario(String cpf, String nome, String email, String telefone, LocalDate nascimento, String setor, String senha) {
+    public Usuario(String cpf, String nome, String email, String telefone, LocalDate nascimento, Setor setor, String senha) {
         this.cpf = cpf;
         this.nome = nome;
         this.email = email;
         this.telefone = telefone;
         this.nascimento = nascimento;
-        this.setor = setor.valueOf(setor);
+        this.setor = setor;
         this.senha = senha;
     }
     
@@ -67,11 +67,11 @@ public class Usuario implements Comparable<Usuario>, Serializable {
         this.nascimento = nascimento;
     }
 
-    public String getSetor() {
+    public Setor getSetor() {
         return setor;
     }
 
-    public void setSetor(String setor) {
+    public void setSetor(Setor setor) {
         this.setor = setor;
     }
 
