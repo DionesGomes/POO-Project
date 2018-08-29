@@ -1,76 +1,78 @@
-
 package main.java.com.github.Lanchonete.model;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+public class Comanda {
 
-public class Comanda { 
-    
-    /*Criar Comanda*/
     private List<Pedido> comanda;
-    private LocalDate data; /*Tada da comanda*/   
+    private final LocalDate data;
+    private int numeroComanda;
+    private static int id;
     private int mesa;
-    private static int id;   
 
-    
     /*construtror*/
-    public List<Pedido> getComanda() {
-        return comanda;
+    public Comanda(int mesa) {
+        comanda = new ArrayList<>();
+        numeroComanda = ++id;
+        this.mesa = mesa;
+        data = LocalDate.now();
     }
-    
 
-    /*Getters e Setters*/
-    public void setComanda(List<Pedido> comanda) {
-        this.comanda = comanda;
+    int getTamanho() {
+        return comanda.size();
+    }
+
+    public LocalDate getData() {
+        return data;
     }
 
     public int getMesa() {
         return mesa;
     }
 
-    public void setMesa(int Mesa) {
-        this.mesa = Mesa;
+    /*Recupera um pedido pelo seu respectivo número na comanda e retorna o indice na lista de comandas*/
+    public int buscarPedido(int numeroPedido) {
+        if (!comanda.isEmpty()) {
+            for (int i = 0; i < comanda.size(); i++) {
+                if (comanda.get(i).getNumeroPedido() == numeroPedido) {
+                    return i;
+                }
+            }
+        }
+        return -1;
     }
 
-    public static int getId() {
-        return id;
+    public boolean adicionaPedido(Pedido p) {
+        p.setMesa(mesa);//define o numero da mesa do pedido(que é o mesmo da comanda) 
+        return comanda.add(p);
     }
 
-    public static void setId(int id) {
-        Comanda.id = id;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        hash = 41 * hash + Objects.hashCode(this.comanda);
-        hash = 41 * hash + this.mesa;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
+    public boolean removePedido(int numeroPedido) {
+        if (comanda.remove(buscarPedido(numeroPedido)) != null) {
             return true;
         }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Comanda other = (Comanda) obj;
-        if (this.mesa != other.mesa) {
-            return false;
-        }
-        if (!Objects.equals(this.comanda, other.comanda)) {
-            return false;
-        }
-        return true;
+        return false;
     }
-      
+
+    public float valorTotal() {//valor total da comanda
+        float total = 0;
+        for (Pedido p : comanda) {
+            total += p.getValorTotal();
+        }
+        return total;
+    }
+
+    /* retorna um pedido específico da comanda. Esse método está relacionada a GerenciaComanda */
+    public Pedido getPedido(int numeroPedido) {
+        return comanda.get(buscarPedido(numeroPedido));
+    }
+    /* retorna uma lista de todos os pedidos da comanda. Esse método está relacionado com GerenciaComanda*/
+    public List<Pedido> getListarPedidos() {
+        return comanda;
+    }
+    
+    /*ToString()*/
 }

@@ -3,7 +3,6 @@ package main.java.com.github.Lanchonete.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Objects;
 
 public class Pedido implements Serializable {    
    
@@ -47,7 +46,7 @@ public class Pedido implements Serializable {
         return status;
     }
 
-    public void AlterarStatus() {
+    public void alterarStatus() {
         status = true;
     }
     
@@ -65,13 +64,11 @@ public class Pedido implements Serializable {
     
     public LocalTime getHora(){
         return hora;
-    }
-    
+    }    
     /*Método para retornar o total*/
     /*Efetua a multiplicação do preço unitário dos produtos por cada produto pedido.*/
     public float getValorTotal(){
-           return  produto.getPreco() * quantidade;
-            
+           return  produto.getPreco() * quantidade;            
     }
     
     @Override

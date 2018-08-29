@@ -1,10 +1,11 @@
 
-package main.java.com.github.Lanchonete.model;
+package main.java.com.github.Lanchonete.controller;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import main.java.com.github.Lanchonete.model.Comanda;
 
 
 public class Gerencia {

@@ -1,57 +1,58 @@
 package main.java.com.github.Lanchonete.model;
 
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
-
+import main.java.com.github.Lanchonete.controller.GerenciaMesa;
 
 public class Cozinha {
-    
+
     /*Atender os Pedidos*/
     private List<Pedido> pedidos;
-    
+
     /*Construtor*/
-    public Cozinha(List<Pedido> pedidos) {
-        this.pedidos = new ArrayList<>();
+    public Cozinha() {
+        pedidos = new ArrayList<>();
     }
 
-    /*Getters e Setters*/
-    public List<Pedido> getPedidos() {
-        return pedidos;
+    /*Método para adicionar um pedido*/
+    public boolean adicionarPedido(Pedido p) {
+        return pedidos.add(p);
     }
 
-    public void setPedidos(List<Pedido> pedidos) {
-        this.pedidos = pedidos;
+    /*Método para remover um pedido feito.*/
+    public boolean removePedido(int numeroPedido) {
+        return pedidos.remove(pedidos.get(buscar(numeroPedido)));
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 19 * hash + Objects.hashCode(this.pedidos);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
+    /*Método para buscar pedido pelo número*/
+    int buscar(int numeroPedido) {
+        if (!pedidos.isEmpty()) {
+            for (int i = 0; i < pedidos.size(); i++) {
+                if (pedidos.get(i).getNumeroPedido() == numeroPedido) {
+                    return i;
+                }
+            }
         }
-        if (obj == null) {
+        return -1;
+    }
+    /*Método para atender os pedidos*/
+    public boolean atenderPedido(int numeroPedido, GerenciaMesa gerencia) {
+        if (buscar(numeroPedido) == -1) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Cozinha other = (Cozinha) obj;
-        if (!Objects.equals(this.pedidos, other.pedidos)) {
-            return false;
-        }
-        return true;
-    }
 
-    @Override
-    public String toString() {
-        return "Cozinha{" + "pedidos=" + pedidos + '}';
-    }  
+        int mesa = pedidos.get(buscar(numeroPedido)).getMesa();/*Identifica um determinado pedido*/
+        gerencia.getComanda(mesa).getPedido(numeroPedido).alterarStatus(); /*Muda o status do pedido para atendido*/
+        return pedidos.remove(pedidos.get(buscar(numeroPedido))); /*Remove o pedidi diretamente na cozinha*/
+    }
     
-}
+    public String visualizar(){
+        String s = "";
+        for (Pedido p : pedidos) {
+            s+= "Mesa:" + p.getMesa() + "Número:" + p.getNumeroPedido() + "\n" + p.toString();
+        }
+        return s;
+    }    
+  }
+
