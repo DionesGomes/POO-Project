@@ -31,7 +31,7 @@ public class App {
         Cozinha cozinha = new Cozinha();
         Menu menu = new Menu();
 
-        /*Adicionando produtos*/
+        /*ADICIONANDO PRODUTOS PARA EFETUAR OS TESTES*/
         menu.adicionarProduto(new Produto(01, "Refrigerente", "Coca-cola", 7.76f));
         menu.adicionarProduto(new Produto(02, "Hamburguer", "X-Tudo", 13.00f));
         menu.adicionarProduto(new Produto(03, "Carne", "Carne de hanburguer", 1.80f));
@@ -41,129 +41,92 @@ public class App {
         int i, mesa, codigoProduto = 0, numeroPedido;
         boolean fechar = true;
 
-        while (fechar) {
+        while(fechar) {
+			System.out.println("----------------TELA INICIAL--------------");
+			System.out.print("1-Autenticar        2-Criar nova conta\n>>>>>");
+			i = ler.nextInt();
+			if(i == 1) {
+				System.out.print("Usuário(email):");
+				username = ler.next();
+				System.out.print("Senha:");
+				password = ler.next();
+			}
 
-            System.out.println("_________________________________________________\n");
-            System.out.println(":::::::::::::::::::LANCHONETE::::::::::::::::::::::");
-            System.out.println("_________________________________________________\n");
+			if(i == 1 && usuario.Autenticacao(username, password)) {
+				while(fechar) {
+					System.out.print("1-Cardápio     2-Mesas     3-Minha Conta"
+							+ "\n4-Cozinha     5-Gerência     0-Sair\n>>>>");
+					i = ler.nextInt();
+                                        
+					if(i == 1) {
+						System.out.print("Gerênciar Menu\n\nLista de Produtos disponiveis:\n");
+						for(Produto p:menu.listarProdutos()) {
+							System.out.println(p);
+						}
+						System.out.print("1-Salvar     2-Excluir     3-Editar     0-Sair\n>>>>");
+						i = ler.nextInt();
+						if(i>=1 && i<=3) {
+							System.out.print("Informe o codigo do produto:");
+							codigoProduto = ler.nextInt();
+						}
+						ler.nextLine();
+						if(i == 1 || i == 3) {
+							System.out.print("Informe o nome do produto:");
+							String nomeProduto = ler.nextLine();
+							System.out.print("Informe a descrição do produto:");
+							String descricaoProduto = ler.nextLine();
+							System.out.print("Informe o preço do produto:");
+							float precoProduto = ler.nextFloat();
+							if(i == 1) {
+								System.out.println(menu.adicionarProduto(new Produto(codigoProduto, nomeProduto, descricaoProduto, precoProduto)));
+							}
+							else if(i == 3) {
+								System.out.println(menu.editarProduto(codigoProduto, new Produto(codigoProduto, nomeProduto, descricaoProduto, precoProduto)));
+							}
+						}
+						else if(i == 2) {
+							System.out.println(menu.excluirProduto(codigoProduto));
+						}	
+					}
 
-            System.out.println(" ||(-1-)LOGIN||                ||(-2-)CADASTRE-SE||");
+					else if(i == 3) {
+						System.out.print("Informe\n1-Editar Usuário     2-Excluir Usuário     0-Sair\n>>>>");
+						i = ler.nextInt();
+						if(i==1 || i==2) {
+							System.out.print("Informe o E-mail que deseja alterar:");
+							username = ler.next();
+						}
+						if(i==1) {
+							System.out.println(usuario.uptadeUsuario(username, cadastrarNovoUsuario(ler)));
+						}
+						else if(i == 2) {
+							System.out.println(usuario.removeLogin(username));
+						}
+					}			
+					
+					else {
+						fechar=false;
+					}
+				}
+			}
+	
+			else if(i == 2) {
+				usuario.addLogin(cadastrarNovoUsuario(ler));
+			}
+			
+			fechar = true;
+		}
 
-            i = ler.nextInt();
-            if (i == 1) {
-                System.out.println("Digite o seu E-mail de usuário:");
-                username = ler.next();
-                System.out.println("Digite a sua Senha de usuário: ");
-                password = ler.next();
-            }
-
-            if (i == 1 && usuario.Autenticacao(username, password)) {
-
-                limparTela();
-                System.out.println(":::::::::::::::::::::::::::::::::::::::::::: LOGADO COM SUCESSO! :::::::::::::::::::::::::::::::::::::::::::::\n");
-
-                while (fechar) {
-                    System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::: MENU ::::::::::::::::::::::::::::::::::::::::::::::::::::\n");
-                    System.out.println("||(-1-)CARDÁPIO||   ||(-2-)MESAS||   ||(-3-)CONTA||  ||(-4-)COZINHA||  ||(-5-)GERÊNCIA||  ||(-0-)PARA SAIR||\n");
-
-                    if (i == 1) {
-                        System.out.println(":::::::::::::::::::::::::::::::::::::  PRODUTOS DISPONÍVEIS ::::::::::::::::::::::::::::::::::::::::::::::::::::\n");
-                        for (Produto produtos : menu.listarProdutos()) {
-                            System.out.println(produtos);
-                        }
-
-                        System.out.println("(-1-)SALVAR (-2-)EDITAR (-3-)EXCLUIR (-0-)SAIR\n");
-
-                        i = ler.nextInt();
-                        if (i == 3) {
-                            System.out.println("DIGITE O CÓDIGO DO PRODUTO");
-                            codigoProduto = ler.nextInt();
-                        }
-                        ler.nextInt();
-                        if ((i == 1) || (i == 2)) {
-                            System.out.println("DIGITE O NOME DO PRODUTO:");
-                            String nomeProduto = ler.nextLine();
-                            System.out.println("GIGITE A DESCRIÇÃO DO PRODUTO:");
-                            String descricaoProduto = ler.nextLine();
-                            System.out.println("DIGITE O PREÇO DO PRODUTO:");
-                            float precoProduto = ler.nextFloat();
-
-                            if (i == 1) {
-                                System.out.println(menu.adicionarProduto(new Produto(codigoProduto, nomeProduto, descricaoProduto, precoProduto)));
-                            } else if (i == 3) {
-                                System.out.println(menu.editarProduto(codigoProduto, new Produto(codigoProduto, nomeProduto, descricaoProduto, precoProduto)));
-                            }
-                        } else if (i == 2) {
-                            System.out.println(menu.excluirProduto(codigoProduto));
-                        }
-                    } else if (i == 2) {
-                        System.out.println("DIGITE O NUMERO DA MESA:");
-                        mesa = ler.nextInt();
-                        System.out.println("(-1-)CRIAR COMANDA (-2-)VISUALIZAR PEDIDOS (-3-)NOVO PEDIDO (-4-)FECHAR COMANDA (-0-)SAIR\n");
-                        i = ler.nextInt();
-                        if (i == 1) {
-                            System.out.println(gerenciamesa.novaComanda(mesa));
-                        } else if (i == 2) {
-                            System.out.println(gerenciamesa.verPedidos(mesa));
-                        } else if (i == 3) {
-                            /*Implementar*/
-                        } else if (i == 4) {
-                            System.out.println(gerenciamesa.fecharComanda(mesa));
-                        }
-                    } else if (i == 3) {
-                        System.out.print("||(-1-)ATUALIZAR DADOS DO USUÁRI||   ||(-2-)EXCLUIR USUÁRIO||  ||(-0-)SAIR||");
-                        i = ler.nextInt();
-                        if ((i == 1) || (i == 2)) {
-                            System.out.print(" DIGITE O E-MAIL DO USUÁRIO: ");
-                            username = ler.next();
-                        }
-                        if (i == 1) {
-                            System.out.println(usuario.uptadeUsuario(username, cadastrarNovoUsuario(ler)));
-                        } else if (i == 2) {
-                            System.out.println(usuario.removeLogin(username));
-                        }
-                    } else if (i == 4) {
-                        System.out.print(cozinha.visualizar() + "DIGITE O NÚMERO DO PEDIDO OU (-0-)SAIR :");
-                        numeroPedido = ler.nextInt();
-                        if (numeroPedido > 0) {
-                            System.out.println(cozinha.atenderPedido(numeroPedido, gerenciamesa));
-                        }
-
-                    } else if (i == 5) {
-                        System.out.println("||(-1-)VISUALIZAR COMANDAS COM BASE NA DATA||     ||(-2-)-VISUALIZAR VALOR TOTAL DE UMA COMANDA COM BASE NA DATA||     ||(-0-)SAIR||");
-                        i = ler.nextInt();
-                        if ((i == 1) || (i == 2)) {
-                            System.out.println("DIGITE A DATA DE INÍCIO:");
-                            dataInicio = informeData(ler);
-                            System.out.println("DIGITE A DATA DO FIM:");
-                            dataFim = informeData(ler);
-                        }
-                        if (i == 1) {
-                            System.out.println(Gerencia.listarComandas(dataInicio, dataFim));
-                        } else if (i == 2) {
-                            System.out.println(Gerencia.CalculaLucroTotal(dataInicio, dataFim));
-                        }
-                    } else {
-                        fechar = false;
-                    }
-                }
-            } else if (i == 2) {
-                usuario.addLogin(cadastrarNovoUsuario(ler));
-            }
-            fechar = true;
-        }
-    }
-
+	}
     /*METÓDOS STATICOS*/
  /*GANBIARRA PARA LIMPAR A TELA*/
-    
     public static void limparTela() {
         for (int i = 0; i < 100; i++) {
             System.out.println("");
         }
     }
-    
-     static LocalDate informeData(Scanner ler) {
+
+    static LocalDate informeData(Scanner ler) {
         System.out.print("DIGITE O ANO :");
         int ano = ler.nextInt();
         System.out.print("DIGITE O MÊS :");
@@ -172,7 +135,7 @@ public class App {
         int dia = ler.nextInt();
         return LocalDate.of(ano, mes, dia);
     }
-    
+
     static Usuario cadastrarNovoUsuario(Scanner ler) {
         System.out.print("Informe o CPF:");
         String cpf = ler.next();
@@ -210,5 +173,5 @@ public class App {
                 break;
         }
         return new Usuario(cpf, nome, email, senha, telefone, nascimento, s);
-    }   
+    }
 }
