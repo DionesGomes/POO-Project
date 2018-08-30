@@ -1,6 +1,8 @@
 package main.java.com.github.Lanchonete.controller;
 
+import java.rmi.server.UID;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,8 +17,7 @@ public class GerenciaUsuario {
         usuarios = new HashMap<>();
         
         /*Adicionando o gerente*/
-        addLogin(new Usuario("111.111.111-11", "Gerente", "admin@gmail.com",
-                "9999999999", LocalDate.of(2018, 8, 12), Setor.GERENCIA, "admin"));
+        addLogin(new Usuario("111-111-111-11", "admin", "admin@gmail.com", "admin", "9999-9999", LocalDate.of(1996, Month.AUGUST, 12), Setor.GARCOM));
     }
 
     /*Pesquisa por um funcionario com base em seu email.*/

@@ -16,7 +16,7 @@ public class Usuario implements Comparable<Usuario>, Serializable {
      private String senha;
      
     /*Contrutor*/
-    public Usuario(String cpf, String nome, String email, String telefone, LocalDate nascimento, Setor setor, String senha) {
+    public Usuario(String cpf, String nome, String email, String senha, String telefone, LocalDate nascimento, Setor setor) {
         this.cpf = cpf;
         this.nome = nome;
         this.email = email;
