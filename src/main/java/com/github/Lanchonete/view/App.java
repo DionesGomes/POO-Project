@@ -1,55 +1,110 @@
 package main.java.com.github.Lanchonete.view;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import main.java.com.github.Lanchonete.model.Pedido;
-import main.java.com.github.Lanchonete.model.Produto;
-import main.java.com.github.Lanchonete.model.Usuario;
+;
+import java.util.Scanner;
+import javax.swing.JOptionPane;
 
+import main.java.com.github.Lanchonete.controller.GerenciaMesa;
+import main.java.com.github.Lanchonete.controller.GerenciaUsuario;
+import main.java.com.github.Lanchonete.controller.Menu;
+import main.java.com.github.Lanchonete.model.Cozinha;
+import main.java.com.github.Lanchonete.model.Produto;
 
 /**
  *
  * @author Diones Gomes
  */
+
+
 public class App {
-        
-    
-    
-    public static void main(String[] args){ 
-        
-      
-        List<Produto> produtos = new ArrayList<>(); //Array com os produtos.
-        
-        Produto produto1 = new Produto(1, "Refrigerante", "Coca-Cola", 6.50f);
-        Produto produto2 = new Produto(2, "Carne", "Carne de Hamburguer", 3.50f);
-        Produto produto3 = new Produto(3, "Pão", "Pão de Hamburguer", 4.50f);
-        Produto produto4 = new Produto(4, "Ovo", "Capoeira", 6.00f);
-        Produto produto5 = new Produto(5, "Linguiça", " de Porco", 6.00f);
-        
-       produtos.add(produto1);
-       produtos.add(produto2);
-       produtos.add(produto3);
-       produtos.add(produto4);
-       produtos.add(produto5);
-       
-       /*Listando todos produtos do ArrayList*/
-        for (Produto produto : produtos) {
-            System.out.println("Código :" + produto.getCodigo()+ "Nome :" + produto.getNome()+ "Descrição :" + 
-                    produto.getDescricao() + "Preço :" + produto.getPreco());
-            System.out.println("...............................................");
+
+    public static void main(String[] args) {
+
+        Scanner ler = new Scanner(System.in);
+        GerenciaMesa gerenciamesa = new GerenciaMesa();
+        GerenciaUsuario usuario = new GerenciaUsuario();
+        Cozinha cozinha = new Cozinha();
+        Menu menu = new Menu();
+
+        /*Adicionando produtos*/
+        menu.adicionarProduto(new Produto(01, "Refrigerente", "Coca-cola", 7.76f));
+        menu.adicionarProduto(new Produto(02, "Hamburguer", "X-Tudo", 13.00f));
+        menu.adicionarProduto(new Produto(03, "Carne", "Carne de hanburguer", 1.80f));
+        menu.adicionarProduto(new Produto(04, "Arroz", "Porção de arroz branco", 4.50f));
+
+        String username = null, password = null;
+        boolean fechar = true;
+        int i, codigoProduto = 0;
+
+        while (fechar) {
+
+            System.out.println("_________________________________________________\n");
+            System.out.println(":::::::::::::::::::LANCHONETE::::::::::::::::::::::");
+            System.out.println("_________________________________________________\n");
+
+            
+            System.out.println(" ||(-1-)LOGIN||                ||(-2-)CADASTRE-SE||");
+
+            i = ler.nextInt();
+            if (i == 1) {
+                System.out.println("Digite o seu E-mail de usuário:");
+                username = ler.next();
+                System.out.println("Digite a sua Senha de usuário: ");
+                password = ler.next();
+            }
+
+            if (i == 1 && usuario.Autenticacao(username, password)) {
+
+                limparTela();
+                System.out.println(":::::::::::::::::::::::::::::::::::::::::::: LOGADO COM SUCESSO! :::::::::::::::::::::::::::::::::::::::::::::\n");
+     
+                while (fechar) {
+                    System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::::: MENU ::::::::::::::::::::::::::::::::::::::::::::::::::::\n");
+                    System.out.println("||(-1-)CARDÁPIO||   ||(-2-)MESAS||   ||(-3-)CONTA||  ||(-4-)COZINHA||  ||(-5-)GERÊNCIA||  ||(-0-)PARA SAIR||\n");
+
+                    if (i == 1) {
+                        System.out.println(":::::::::::::::::::::::::::::::::::::  PRODUTOS DISPONÍVEIS ::::::::::::::::::::::::::::::::::::::::::::::::::::\n");
+                        for (Produto produtos : menu.listarProdutos()) {
+                            System.out.println(produtos);
+                        }
+
+                        System.out.println("(-1-)SALVAR (-2-)EDITAR (-3-)EXCLUIR (-0-)SAIR\n");
+
+                        i = ler.nextInt();
+                        if (i == 3) {
+                            System.out.println("DIGITE O CÓDIGO DO PRODUTO");
+                            codigoProduto = ler.nextInt();
+                        }
+                        ler.nextInt();
+                        if ((i == 1) || (i == 2)) {
+                            System.out.println("DIGITE O NOME DO PRODUTO:");
+                            String nomeProduto = ler.nextLine();
+                            System.out.println("GIGITE A DESCRIÇÃO DO PRODUTO:");
+                            String descricaoProduto = ler.nextLine();
+                            System.out.println("DIGITE O PREÇO DO PRODUTO:");
+                            float precoProduto = ler.nextFloat();
+
+                            if (i == 1) {
+                                System.out.println(menu.adicionarProduto(new Produto(codigoProduto, nomeProduto, descricaoProduto, precoProduto)));
+                            } else if (i == 3) {
+                                System.out.println(menu.editarProduto(codigoProduto, new Produto(codigoProduto, nomeProduto, descricaoProduto, precoProduto)));
+                            }
+                        } else if (i == 2) {
+                            System.out.println(menu.excluirProduto(codigoProduto));
+                        }
+                    }
+                    fechar = false;
+                }
+            }
+
+            fechar = false;
         }
-        
-        /*Removendo algum produto*/
-        produtos.remove(produto5);
-        
-        for (Produto produto : produtos) {
-            System.out.println("Código :" + produto.getCodigo()+ "Nome :" + produto.getNome()+ "Descrição :" + 
-                    produto.getDescricao() + "Preço :" + produto.getPreco());
-            System.out.println("................................................");
+    }
+
+    /*GANBIARRA PARA LIMPAR A TELA*/
+    public static void limparTela() {
+        for (int i = 0; i < 100; i++) {
+            System.out.println("");
         }
-        
-               
-    }         
+    }
 }
-    

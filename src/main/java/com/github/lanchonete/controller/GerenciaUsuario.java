@@ -15,7 +15,7 @@ public class GerenciaUsuario {
         usuarios = new HashMap<>();
         
         /*Adicionando o gerente*/
-        addLogin(new Usuario("111.111.111-11", "Gerente", "admin@gmail.com.br",
+        addLogin(new Usuario("111.111.111-11", "Gerente", "admin@gmail.com",
                 "9999999999", LocalDate.of(2018, 8, 12), Setor.GERENCIA, "admin"));
     }
 
