@@ -2,10 +2,9 @@ package main.java.com.github.Lanchonete.view;
 
 ;
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.Scanner;
-import javax.swing.JOptionPane;
-import main.java.com.github.Lanchonete.controller.Gerencia;
+
+
 
 import main.java.com.github.Lanchonete.controller.GerenciaMesa;
 import main.java.com.github.Lanchonete.controller.GerenciaUsuario;
@@ -25,10 +24,8 @@ public class App {
 
     public static void main(String[] args) {
 
-        Scanner ler = new Scanner(System.in);
-        GerenciaMesa gerenciamesa = new GerenciaMesa();
-        GerenciaUsuario usuario = new GerenciaUsuario();
-        Cozinha cozinha = new Cozinha();
+        Scanner ler = new Scanner(System.in);        
+        GerenciaUsuario usuario = new GerenciaUsuario();      
         Menu menu = new Menu();
 
         /*ADICIONANDO PRODUTOS PARA EFETUAR OS TESTES*/
@@ -36,46 +33,49 @@ public class App {
         menu.adicionarProduto(new Produto(02, "Hamburguer", "X-Tudo", 13.00f));
         menu.adicionarProduto(new Produto(03, "Carne", "Carne de hanburguer", 1.80f));
 
-        String username = null, password = null;
-        LocalDate dataInicio = null, dataFim = null;
-        int i, mesa, codigoProduto = 0, numeroPedido;
+        String username = null, password = null;       
+        int i, codigoProduto = 0;
         boolean fechar = true;
 
         while(fechar) {
-			System.out.println("----------------TELA INICIAL--------------");
-			System.out.print("1-Autenticar        2-Criar nova conta\n>>>>>");
+                        System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::");
+			System.out.println(":::::::::::::::::::::LANCHONETE::::::::::::::::::");
+                        System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::\n");
+			System.out.print("    (1)PARA ENTRAR        (2)PARA CADASTRE-SE \n\n ~ "        );
 			i = ler.nextInt();
 			if(i == 1) {
-				System.out.print("Usuário(email):");
+				System.out.print("DIGITE O SEU E-MAIL DE USUÁRIO: ");
 				username = ler.next();
-				System.out.print("Senha:");
+				System.out.print("DIGITE A SUA SENHA DE USUÁRIO : ");
 				password = ler.next();
 			}
 
 			if(i == 1 && usuario.Autenticacao(username, password)) {
 				while(fechar) {
-					System.out.print("1-Cardápio     2-Mesas     3-Minha Conta"
-							+ "\n4-Cozinha     5-Gerência     0-Sair\n>>>>");
-					i = ler.nextInt();
-                                        
+                                        System.out.println("::::::::::::::::::::::::::::::::::::MENU:::::::::::::::::::::::::::::::::::::::");
+					System.out.print("(1)CARDÁPIO     (2)MESAS     (3)CONTAS (4)COZINHA      (5)GERÊNCIA  (0)SAIR \n\n ~ ");
+					i = ler.nextInt();                                        
+   
 					if(i == 1) {
-						System.out.print("Gerênciar Menu\n\nLista de Produtos disponiveis:\n");
+                                                
+						System.out.print("\n::::::::::::::::PRODUTOS DISPONÍVEIS:::::::::::\n");
 						for(Produto p:menu.listarProdutos()) {
 							System.out.println(p);
 						}
-						System.out.print("1-Salvar     2-Excluir     3-Editar     0-Sair\n>>>>");
+                                                System.out.println("::::::::::::::::::::::::PRODUTOS:::::::::::::::::::::");
+						System.out.print("(1)SALVAR     (2)EXCLUIR     (3)EDITAR     (0)SAIR \n\n ~ ");
 						i = ler.nextInt();
 						if(i>=1 && i<=3) {
-							System.out.print("Informe o codigo do produto:");
+							System.out.print("DIGITE O CÓDIGO DO PRODUTO:");
 							codigoProduto = ler.nextInt();
 						}
 						ler.nextLine();
 						if(i == 1 || i == 3) {
-							System.out.print("Informe o nome do produto:");
+							System.out.print("DIGITE O NOME DO PRODUTO : ");
 							String nomeProduto = ler.nextLine();
-							System.out.print("Informe a descrição do produto:");
+							System.out.print("DIGITE A DESCRIÇÃO DO PRODUTO : ");
 							String descricaoProduto = ler.nextLine();
-							System.out.print("Informe o preço do produto:");
+							System.out.print("DIGITE O PREÇO DO PRODUTO : ");
 							float precoProduto = ler.nextFloat();
 							if(i == 1) {
 								System.out.println(menu.adicionarProduto(new Produto(codigoProduto, nomeProduto, descricaoProduto, precoProduto)));
@@ -90,10 +90,11 @@ public class App {
 					}
 
 					else if(i == 3) {
-						System.out.print("Informe\n1-Editar Usuário     2-Excluir Usuário     0-Sair\n>>>>");
+                                                System.out.println(":::::::::::::::::::::::::::::USUÁRIOS::::::::::::::::::::::::::::::");
+						System.out.print("(1)EDITAR USUÁRIO     (2)EXCLUIR USUÁRIO     (0)SAIR \n\n ~ ");
 						i = ler.nextInt();
 						if(i==1 || i==2) {
-							System.out.print("Informe o E-mail que deseja alterar:");
+							System.out.print("DIGITE O E-MAIL DE USUÁRIO : ");
 							username = ler.next();
 						}
 						if(i==1) {
@@ -112,20 +113,19 @@ public class App {
 	
 			else if(i == 2) {
 				usuario.addLogin(cadastrarNovoUsuario(ler));
-			}
-			
+			}			
 			fechar = true;
 		}
-
 	}
-    /*METÓDOS STATICOS*/
- /*GANBIARRA PARA LIMPAR A TELA*/
+    
+    /*METÓDOS STATICOS*/ 
     public static void limparTela() {
         for (int i = 0; i < 100; i++) {
             System.out.println("");
         }
     }
-
+    
+    
     static LocalDate informeData(Scanner ler) {
         System.out.print("DIGITE O ANO :");
         int ano = ler.nextInt();
