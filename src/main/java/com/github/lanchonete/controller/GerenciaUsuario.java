@@ -29,8 +29,10 @@ public class GerenciaUsuario {
         usuarios = new HashMap<>();
 
         /*Adicionando o gerente para teste.*/
-        addLogin(new Usuario("111-111-111-11", "admin", "admin@gmail.com", "admin", "9999-9999", LocalDate.of(1996, Month.AUGUST, 12), Setor.GARCOM));
-    }
+        addLogin(new Usuario("111.111.111-11", "admin", "admin@gmail.com", "admin", "9999-9999", LocalDate.of(1996, Month.AUGUST, 12), Setor.GARCOM));
+        addLogin(new Usuario("222.222.222-22", "Diones Gomes", "diones@gmail.com", "123", "9999-9999", LocalDate.of(1996, Month.AUGUST, 12), Setor.GARCOM));
+        addLogin(new Usuario("333.333.333-33", "Paulo Freitas", "paulogmail.com", "123", "9999-9999", LocalDate.of(1996, Month.AUGUST, 12), Setor.GARCOM));
+    }    
 
     /**
      * Método para encontar um usuário com base em seu e-mail.

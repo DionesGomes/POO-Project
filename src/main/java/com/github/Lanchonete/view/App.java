@@ -4,10 +4,9 @@ package main.java.com.github.Lanchonete.view;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-import main.java.com.github.Lanchonete.controller.GerenciaMesa;
+
 import main.java.com.github.Lanchonete.controller.GerenciaUsuario;
 import main.java.com.github.Lanchonete.controller.Menu;
-import main.java.com.github.Lanchonete.model.Cozinha;
 import main.java.com.github.Lanchonete.model.Produto;
 import main.java.com.github.Lanchonete.model.Setor;
 import main.java.com.github.Lanchonete.model.Usuario;
@@ -53,7 +52,7 @@ public class App {
             if (i == 1 && usuario.Autenticacao(username, password)) {
                 while (fechar) {
                     System.out.println("::::::::::::::::::::::::::::::::::::MENU:::::::::::::::::::::::::::::::::::::::");
-                    System.out.print("(1)CARDÁPIO   (2)X   (3)USUÁRIOS   (4)X   (5)GERÊNCIA   (0)SAIR \n\n ~ ");
+                    System.out.print("(1)CARDÁPIO   (2)XXXXX   (3)USUÁRIOS   (4)XXXXX   (5)XXXXX   (0)SAIR \n\n ~ ");
                     i = ler.nextInt();
 
                     if (i == 1) {
@@ -87,10 +86,13 @@ public class App {
                         }
                     } else if (i == 3) {
                         System.out.println(":::::::::::::::::::::::::::::USUÁRIOS::::::::::::::::::::::::::::::");
-                        System.out.print("(1)EDITAR USUÁRIO     (2)EXCLUIR USUÁRIO     (0)SAIR \n\n ~ ");
+                        /*Listar os usuáios...*/
+                  
+                        System.out.print("(1)EDITAR USUÁRIO     (2)EXCLUIR USUÁRIO    (0)SAIR \n\n ~ ");
                         i = ler.nextInt();
+                        
                         if (i == 1 || i == 2) {
-                            System.out.print("DIGITE O E-MAIL DE USUÁRIO : ");
+                            System.out.print("DIGITE O E-MAIL DE USUÁRIO DO USUÁRIO QUE VOCÊ DESEJA ALTERAR : ");
                             username = ler.next();
                         }
                         if (i == 1) {
@@ -98,6 +100,8 @@ public class App {
                         } else if (i == 2) {
                             System.out.println(usuario.removeLogin(username));
                         }
+               
+                       
                     } else {
                         fechar = false;
                     }
@@ -115,7 +119,7 @@ public class App {
             System.out.println("");
         }
     }
-
+    /*Construindo*/
     static LocalDate informeData(Scanner ler) {
         System.out.print("DIGITE O ANO :");
         int ano = ler.nextInt();
@@ -126,6 +130,7 @@ public class App {
         return LocalDate.of(ano, mes, dia);
     }
 
+    /*Construindo*/
     static Usuario cadastrarNovoUsuario(Scanner ler) {
         System.out.print("DIGITE O SEU CPF:");
         String cpf = ler.next();
