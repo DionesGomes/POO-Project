@@ -1,19 +1,32 @@
 package main.java.com.github.Lanchonete.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
+/**
+ * Está Classe modela os dados da entidade Produto.
+ *
+ * @sse main.java.com.github.lanchonete.controller.Menu.
+ * @see main.jva.com.github.lanchonete.model.Pedido.
+ * @since 1.8.
+ * @version 1.0.
+ * @author Diones Gomes
+ */
+public class Produto implements Serializable {
 
-public class Produto implements Serializable{
-    
     private int codigo;
     private String nome;
     private String descricao;
     private float preco;
-    
-    /*Construtor*/
+
+    /**
+     * Inicializando todos os atributos da classe Produto.
+     *
+     * @param codigo Referente ao Código do produto.
+     * @param nome Referente ao Nome do Produto.
+     * @param descricao Refere-se a Descrição do Produto.
+     * @param preco Referente ao Preço de vanda do Produto.
+     */
     public Produto(int codigo, String nome, String descricao, float preco) {
         this.codigo = codigo;
         this.nome = nome;
@@ -93,8 +106,8 @@ public class Produto implements Serializable{
 
     @Override
     public String toString() {
-        return "Produto{" + "codigo=" + codigo + ", nome=" + nome +
-                ", descricao=" + descricao + ", preco=" + preco + '}';
+        return "Produto{" + "codigo = " + codigo + ", nome = " + nome
+                + ", descricao = " + descricao + ", preco = " + preco + '}';
     }
-       
+
 }

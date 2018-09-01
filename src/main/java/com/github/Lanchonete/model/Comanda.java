@@ -3,8 +3,15 @@ package main.java.com.github.Lanchonete.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
+/**
+ * Esta Classe modela os dados da entidade Comanda.
+ * main.java.com.github.controller.Menu.
+ *
+ * @since 1.8.
+ * @version 1.0.
+ * @author Diones Gomes
+ */
 public class Comanda {
 
     private List<Pedido> comanda;
@@ -13,16 +20,17 @@ public class Comanda {
     private static int id;
     private int mesa;
 
-    /*construtror*/
+    /**
+     * Inicializa o valor do atributo mesa.
+     *
+     * @param mesa Refere-se ao valor único, do novo pedido que será criado para
+     * uma mesa.
+     */
     public Comanda(int mesa) {
         comanda = new ArrayList<>();
         numeroComanda = ++id;
         this.mesa = mesa;
         data = LocalDate.now();
-    }
-
-    int getTamanho() {
-        return comanda.size();
     }
 
     public LocalDate getData() {
@@ -33,8 +41,20 @@ public class Comanda {
         return mesa;
     }
 
-    /*Recupera um pedido pelo seu respectivo número na comanda e retorna o indice na lista de comandas*/
+    int getTamanho() {
+        return comanda.size();
+    }
+
+    /**
+     * Recupera o pedido atráves do número do pedido da mesa.
+     *
+     * @param numeroPedido Refere-se ao número do pedido que é unico para cada
+     * pedido.
+     * @return o indíce do pedido realizado, retorna um inteiro positivo se
+     * presente caso contrário retorna -1.
+     */
     public int buscarPedido(int numeroPedido) {
+        /*Recupera um pedido pelo seu respectivo número na comanda e retorna o indice na lista de comandas*/
         if (!comanda.isEmpty()) {
             for (int i = 0; i < comanda.size(); i++) {
                 if (comanda.get(i).getNumeroPedido() == numeroPedido) {
@@ -45,11 +65,24 @@ public class Comanda {
         return -1;
     }
 
+    /**
+     * Método para adicionar um pedido a mesa.
+     *
+     * @param p Refere-se ao número do pedido que será adicionado a mesa.
+     * @return true ou false.
+     */
     public boolean adicionaPedido(Pedido p) {
-        p.setMesa(mesa);//define o numero da mesa do pedido(que é o mesmo da comanda) 
+        p.setMesa(mesa);
         return comanda.add(p);
     }
 
+    /**
+     * Método para remover um pedido.
+     *
+     * @param numeroPedido Refere-se ao número do pedido na mesa cujo pedido irá
+     * ser removido.
+     * @return true para removido ou false se não removido.
+     */
     public boolean removePedido(int numeroPedido) {
         if (comanda.remove(buscarPedido(numeroPedido)) != null) {
             return true;
@@ -57,6 +90,11 @@ public class Comanda {
         return false;
     }
 
+    /**
+     * Método para calcular o valor tatal da comanda.
+     *
+     * @return O valor total do somatória da comanda.
+     */
     public float valorTotal() {//valor total da comanda
         float total = 0;
         for (Pedido p : comanda) {
@@ -65,14 +103,36 @@ public class Comanda {
         return total;
     }
 
-    /* retorna um pedido específico da comanda. Esse método está relacionada a GerenciaComanda */
+    /**
+     * Método para retornar o número do pedido.
+     *
+     * @param numeroPedido Fefere-se o número do pedido que será removido.
+     * @return O pedido se encontrado, retorna NULL se não encontrado.
+     */
     public Pedido getPedido(int numeroPedido) {
         return comanda.get(buscarPedido(numeroPedido));
     }
-    /* retorna uma lista de todos os pedidos da comanda. Esse método está relacionado com GerenciaComanda*/
+
+    /**
+     * Retorna uma lista contando todos os pedidos feitos.
+     *
+     * @return Uma lista com os pedidos.
+     */
     public List<Pedido> getListarPedidos() {
         return comanda;
     }
-    
+
     /*ToString()*/
+    /**
+     * Retorna o toString da classe pedido.
+     *
+     * @return String contendo todas as informações dos pedidos realizado.
+     */
+    public String toString() {
+        String s = data.toString() + " |Mesa:" + mesa + " |N°:" + numeroComanda + "\n==================================\n";
+        for (Pedido p : comanda) {
+            s += p.toString();
+        }
+        return s + "===========TOTAL:" + valorTotal() + " R$===========\n\n";
+    }
 }

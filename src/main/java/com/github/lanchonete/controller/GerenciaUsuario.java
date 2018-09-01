@@ -1,6 +1,5 @@
 package main.java.com.github.Lanchonete.controller;
 
-import java.rmi.server.UID;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.HashMap;
@@ -9,18 +8,37 @@ import java.util.Map;
 import main.java.com.github.Lanchonete.model.Setor;
 import main.java.com.github.Lanchonete.model.Usuario;
 
+/**
+ * Esta classe contém métodos para Adicionar, Atualizar e Deletar os dados de um
+ * usuário. Aqui será realizada a autenticação dos usuários.
+ *
+ * @since 1.8.
+ * @version 1.0.
+ * @see java.util.HashMap.
+ * @see main.java.com.github.model.usuario.
+ * @author Diones Gomes
+ */
 public class GerenciaUsuario {
 
     private Map<String, Usuario> usuarios;
 
+    /**
+     * Inicializando o construtor, sem passar parâmetros.
+     */
     public GerenciaUsuario() {
         usuarios = new HashMap<>();
-        
-        /*Adicionando o gerente*/
+
+        /*Adicionando o gerente para teste.*/
         addLogin(new Usuario("111-111-111-11", "admin", "admin@gmail.com", "admin", "9999-9999", LocalDate.of(1996, Month.AUGUST, 12), Setor.GARCOM));
     }
 
-    /*Pesquisa por um funcionario com base em seu email.*/
+    /**
+     * Método para encontar um usuário com base em seu e-mail.
+     *
+     * @param email Refere-se ao e-mail do usuário que é usado como base para a
+     * pesquisa.
+     * @return null se o usuário não está cadastrado, ou o e-mail se cadastrado.
+     */
     public Usuario encontrarUsuario(String email) {
         if (usuarios.isEmpty()) {
             return null;
@@ -28,7 +46,12 @@ public class GerenciaUsuario {
         return usuarios.get(email);
     }
 
-    /*Método para adicionar um novo usuário*/
+    /**
+     * Método para adicionar um novo usuário ao sistema.
+     *
+     * @param usuario Refere-se ao novo usuário que será dastrado no sistema.
+     * @return true ou false;
+     */
     public boolean addLogin(Usuario usuario) {
         /*Verificando se o usuário já não existe*/
         if (encontrarUsuario(usuario.getEmail()) == null) {
@@ -38,7 +61,13 @@ public class GerenciaUsuario {
         return false;
     }
 
-    /*Método para remover um usuário já cadastrado*/
+    /**
+     * Método para remover um usuário já cadastrado no sistema.
+     *
+     * @param email Refere-se ao email do usuário que é usado como base para a
+     * remoção.
+     * @return true ou false.
+     */
     public boolean removeLogin(String email) {
         Usuario usuario = encontrarUsuario(email);
         if (usuario != null) {
@@ -47,17 +76,30 @@ public class GerenciaUsuario {
         return false;
     }
 
-    //recebe um email por fora porque se for buscar pelo email do usuario(usuario editado) passado
-    //pode acontecer do email dele ter sido mudado: Busca pelo email antigo
+    /**
+     * Método para atualizar os dados de um usuário ja dastrado.
+     *
+     * @param email Refere-se ao email que identifica cada usuário para a
+     * atualização.
+     * @param usuario Referese ao nome de usuário a ser atualizado.
+     * @return true ou false.
+     */
     public boolean uptadeUsuario(String email, Usuario usuario) {
-        if (encontrarUsuario(email) != null) {//verifica se so usuario que vai ser editado existe
-            removeLogin(email);//apaga o usuario antigo
-            return addLogin(usuario);//adiciona o usuario editado
+        if (encontrarUsuario(email) != null) {
+            removeLogin(email);
+            return addLogin(usuario);
         }
         return false;
     }
 
-    /*Método para autenticação de usuários*/
+    /**
+     * Método para verificar se o usuário está ou não cadastrado no sistema.
+     *
+     * @param email Refere-se a o e-mail que identifica cada usuário cadastrado.
+     * @param senha Refere-se a senha do usuário que é critério de autenticação
+     * do login.
+     * @return true ou false.
+     */
     public boolean Autenticacao(String email, String senha) {
         Usuario usuario = encontrarUsuario(email);
         if (usuario.getSenha().equals(senha)) {
