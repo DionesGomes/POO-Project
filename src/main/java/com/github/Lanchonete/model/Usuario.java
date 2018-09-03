@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
- * A classe Usuario modela a entidade Usuário.
+ * A classe Usuario modela a entidade Usuário
  *
  * @author Diones Gomes
- * @see GerenciaUsuario
+ * @see main.java.com.github.Lanchonete.controller.GerenciaUsuario
  */
 public class Usuario implements Serializable {
 

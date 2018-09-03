@@ -20,8 +20,9 @@ public class Gerencia {
 
     /**
      * Método para adicionar uma mesa que já foi encerrada.
+     *  
      */
-    public static boolean adicionarComanda(Comanda c) {//esta função é usada somente por GerenciaMesa 
+    static boolean adicionarComanda(Comanda c) {
         return gerenciaComanda.add(c);
     }
 

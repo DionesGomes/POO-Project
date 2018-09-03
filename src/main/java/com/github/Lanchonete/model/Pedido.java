@@ -7,7 +7,7 @@ import java.time.LocalTime;
 /**
  * Esta Classe modela os dados da entidade Pedido.
  *
- * @see main.java.com.github.lanchonete.controller.Menu.
+ * @see main.java.com.github.Lanchonete.controller.Menu
  * @author Diones Gomes
  */
 public class Pedido implements Serializable {
@@ -91,6 +91,7 @@ public class Pedido implements Serializable {
      * Esse método retorna o valor total do pedido realizado. A formula é dada
      * atráves da multiplicação do preço pela unidade, multiplicada pela
      * quantidade do produto.
+     * @return Um float com o valor tatal.
      */
     public float getValorTotal() {
         return produto.getPreco() * quantidade;

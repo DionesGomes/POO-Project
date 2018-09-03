@@ -10,9 +10,9 @@ import main.java.com.github.Lanchonete.model.Pedido;
 /**
  * Esta classe faz o gerenciamento das mesas.
  *
- * @see Comandas.
- * @see Gerencia.
- * @see Pedido.
+ * @see Comanda
+ * @see Gerencia
+ * @see Pedido
  * @author Diones Gomes
  */
 public class GerenciaMesa {

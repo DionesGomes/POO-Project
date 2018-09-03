@@ -7,8 +7,8 @@ import main.java.com.github.Lanchonete.model.Produto;
  * Esta classe contém medos para Adicionar, Consultar, Atualizar e Deletar
  * Produtos.
  *
- * @see java.util.ArrayList.
- * @see main.java.com.github.Lanchonete.model.Produto.
+ * @see java.util.ArrayList
+ * @see main.java.com.github.Lanchonete.model.Produto
  * @author Diones Gomes
  */
 public class Menu {

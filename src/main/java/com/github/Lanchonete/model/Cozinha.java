@@ -2,12 +2,12 @@ package main.java.com.github.Lanchonete.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import main.java.com.github.Lanchonete.controller.GerenciaMesa;
+
 
 /**
  * Esta classe modela os dados referentes a entidade Cozinha.
  *
- * @sse main.java.com.github.model.Pedido.
+ * @see main.java.com.github.Lanchonete.model.Pedido
  * @author Diones Gomes
  */
 public class Cozinha {

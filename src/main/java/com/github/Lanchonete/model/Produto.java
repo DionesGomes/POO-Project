@@ -6,8 +6,8 @@ import java.util.Objects;
 /**
  * Está Classe modela os dados da entidade Produto.
  *
- * @sse main.java.com.github.lanchonete.controller.Menu.
- * @see main.jva.com.github.lanchonete.model.Pedido.
+ * @see main.java.com.github.Lanchonete.controller.Menu
+ * @see main.java.com.github.Lanchonete.model.Pedido
  * @author Diones Gomes
  */
 public class Produto implements Serializable {

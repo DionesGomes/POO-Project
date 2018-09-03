@@ -12,8 +12,8 @@ import main.java.com.github.Lanchonete.model.Usuario;
  * Esta classe contém métodos para Adicionar, Atualizar e Deletar os dados de um
  * usuário. Aqui será realizada a autenticação dos usuários.
  *
- * @see java.util.HashMap.
- * @see main.java.com.github.model.usuario.
+ * @see java.util.HashMap
+ * @see main.java.com.github.Lanchonete.model.Usuario
  * @author Diones Gomes
  */
 public class GerenciaUsuario {

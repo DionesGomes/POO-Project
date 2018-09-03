@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Esta Classe modela os dados da entidade Comanda.
- * main.java.com.github.controller.Menu.
+ * @see main.java.com.github.Lanchonete.controller.Menu
  *
  * @author Diones Gomes
  */
