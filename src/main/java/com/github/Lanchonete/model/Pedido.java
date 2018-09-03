@@ -36,7 +36,6 @@ public class Pedido implements Serializable {
         /*Incrementa o número do pedido*/
         status = false;
     }
-
     /*Getters e Setters*/
     public Produto getProduto() {
         return produto;
@@ -85,7 +84,6 @@ public class Pedido implements Serializable {
     public LocalTime getHora() {
         return hora;
     }
-
     /**
      *
      * Esse método retorna o valor total do pedido realizado. A formula é dada
@@ -96,7 +94,6 @@ public class Pedido implements Serializable {
     public float getValorTotal() {
         return produto.getPreco() * quantidade;
     }
-
     /**
      * Visualiza todos pedidos que ainda não foram atendidos na cozinha.
      *

@@ -43,7 +43,6 @@ public class Gerencia {
         }
         return s;
     }
-
     /**
      * Método para calcular o lucro total de todas as mesas, dentro de um
      * período de tempo específico.

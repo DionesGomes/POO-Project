@@ -20,7 +20,6 @@ public class Cozinha {
     public Cozinha() {
         pedidos = new ArrayList<>();
     }
-
     /**
      * Método para adicionar um pedido na lista de Pedidos.
      *
@@ -30,7 +29,6 @@ public class Cozinha {
     public boolean adicionarPedido(Pedido p) {
         return pedidos.add(p);
     }
-
     /**
      * Métedo para remover um pedido da lista de Pedidos com base no número do
      * mesmo.
@@ -42,7 +40,6 @@ public class Cozinha {
         /*Adicionar exceção posteriomente.*/
         return pedidos.remove(pedidos.get(buscar(numeroPedido)));
     }
-
     /**
      * Método para buscar um Pedido.
      *
@@ -60,7 +57,6 @@ public class Cozinha {
         }
         return -1;
     }
-
     /**
      *
      * @return Uma String contendo todas as informações referentes a um pedido.

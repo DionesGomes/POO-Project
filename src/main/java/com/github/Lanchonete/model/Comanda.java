@@ -42,7 +42,6 @@ public class Comanda {
     int getTamanho() {
         return comanda.size();
     }
-
     /**
      * Recupera o pedido atráves do número do pedido da mesa.
      *
@@ -62,7 +61,6 @@ public class Comanda {
         }
         return -1;
     }
-
     /**
      * Método para adicionar um pedido a mesa.
      *
@@ -73,7 +71,6 @@ public class Comanda {
         p.setMesa(mesa);
         return comanda.add(p);
     }
-
     /**
      * Método para remover um pedido.
      *
@@ -87,7 +84,6 @@ public class Comanda {
         }
         return false;
     }
-
     /**
      * Método para calcular o valor tatal da comanda.
      *
@@ -100,7 +96,6 @@ public class Comanda {
         }
         return total;
     }
-
     /**
      * Método para retornar o número do pedido.
      *
@@ -110,7 +105,6 @@ public class Comanda {
     public Pedido getPedido(int numeroPedido) {
         return comanda.get(buscarPedido(numeroPedido));
     }
-
     /**
      * Retorna uma lista contando todos os pedidos feitos.
      *
@@ -119,7 +113,6 @@ public class Comanda {
     public List<Pedido> getListarPedidos() {
         return comanda;
     }
-
     /*ToString()*/
     /**
      * Retorna o toString da classe pedido.
@@ -131,6 +124,6 @@ public class Comanda {
         for (Pedido p : comanda) {
             s += p.toString();
         }
-        return s + "===========TOTAL:" + valorTotal() + " R$===========\n\n";
+        return s;
     }
 }
