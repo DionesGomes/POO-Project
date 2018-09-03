@@ -8,8 +8,6 @@ import java.util.Objects;
  *
  * @sse main.java.com.github.lanchonete.controller.Menu.
  * @see main.jva.com.github.lanchonete.model.Pedido.
- * @since 1.8.
- * @version 1.0.
  * @author Diones Gomes
  */
 public class Produto implements Serializable {

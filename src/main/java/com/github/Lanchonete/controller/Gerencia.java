@@ -9,8 +9,6 @@ import main.java.com.github.Lanchonete.model.Comanda;
 /**
  * Esta classe contém as funções referentes ao gerenciamento das mesas.
  *
- * @since 1.8.
- * @version 1.0.
  * @author Diones Gomes
  */
 public class Gerencia {

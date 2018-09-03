@@ -8,8 +8,6 @@ import main.java.com.github.Lanchonete.controller.GerenciaMesa;
  * Esta classe modela os dados referentes a entidade Cozinha.
  *
  * @sse main.java.com.github.model.Pedido.
- * @since 1.8.
- * @version 1.0.
  * @author Diones Gomes
  */
 public class Cozinha {
@@ -61,26 +59,6 @@ public class Cozinha {
             }
         }
         return -1;
-    }
-
-    /**
-     * Método para efetuar o atendimento de um pedido realizado.
-     *
-     * @param numeroPedido Refere-se ao número do pedido.
-     * @param gerencia Refere-se ao objeto relacionado a mesa que efetua o
-     * pedido.
-     * @return true ou false.
-     */
-    public boolean atenderPedido(int numeroPedido, GerenciaMesa gerencia) {
-        if (buscar(numeroPedido) == -1) {
-            return false;
-        }
-
-        int mesa = pedidos.get(buscar(numeroPedido)).getMesa();/*Identifica um determinado pedido*/
-        gerencia.getComanda(mesa).getPedido(numeroPedido).alterarStatus();
-        /*Muda o status do pedido para atendido*/
-        return pedidos.remove(pedidos.get(buscar(numeroPedido)));
-        /*Remove o pedidi diretamente na cozinha*/
     }
 
     /**

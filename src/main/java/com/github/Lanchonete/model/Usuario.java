@@ -8,8 +8,6 @@ import java.time.LocalDate;
  *
  * @author Diones Gomes
  * @see GerenciaUsuario
- * @since 1.8
- * @version 1.0
  */
 public class Usuario implements Serializable {
 

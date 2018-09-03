@@ -9,8 +9,6 @@ import main.java.com.github.Lanchonete.model.Produto;
  *
  * @see java.util.ArrayList.
  * @see main.java.com.github.Lanchonete.model.Produto.
- * @since 1.8.
- * @version 1.0.
  * @author Diones Gomes
  */
 public class Menu {

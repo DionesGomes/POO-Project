@@ -8,8 +8,6 @@ import java.util.List;
  * Esta Classe modela os dados da entidade Comanda.
  * main.java.com.github.controller.Menu.
  *
- * @since 1.8.
- * @version 1.0.
  * @author Diones Gomes
  */
 public class Comanda {

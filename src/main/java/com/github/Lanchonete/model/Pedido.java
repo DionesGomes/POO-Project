@@ -8,8 +8,6 @@ import java.time.LocalTime;
  * Esta Classe modela os dados da entidade Pedido.
  *
  * @see main.java.com.github.lanchonete.controller.Menu.
- * @since 1.8.
- * @version 1.0.
  * @author Diones Gomes
  */
 public class Pedido implements Serializable {

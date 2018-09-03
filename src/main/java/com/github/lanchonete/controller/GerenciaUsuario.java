@@ -12,8 +12,6 @@ import main.java.com.github.Lanchonete.model.Usuario;
  * Esta classe contém métodos para Adicionar, Atualizar e Deletar os dados de um
  * usuário. Aqui será realizada a autenticação dos usuários.
  *
- * @since 1.8.
- * @version 1.0.
  * @see java.util.HashMap.
  * @see main.java.com.github.model.usuario.
  * @author Diones Gomes
@@ -29,10 +27,9 @@ public class GerenciaUsuario {
         usuarios = new HashMap<>();
 
         /*Adicionando o gerente para teste.*/
-        addLogin(new Usuario("111.111.111-11", "admin", "admin@gmail.com", "admin", "9999-9999", LocalDate.of(1996, Month.AUGUST, 12), Setor.GARCOM));
-        addLogin(new Usuario("222.222.222-22", "Diones Gomes", "diones@gmail.com", "123", "9999-9999", LocalDate.of(1996, Month.AUGUST, 12), Setor.GARCOM));
-        addLogin(new Usuario("333.333.333-33", "Paulo Freitas", "paulogmail.com", "123", "9999-9999", LocalDate.of(1996, Month.AUGUST, 12), Setor.GARCOM));
-    }    
+        addLogin(new Usuario("111.111.111-11", "Administrador", "admin@gmail.com", "admin", "9999-9999", LocalDate.of(1996, Month.AUGUST, 12), Setor.GERENCIA));
+        addLogin(new Usuario("111.111.111-11", "Diones Gomes", "diones@gmail.com", "123", "8888-8888", LocalDate.of(1996, Month.AUGUST, 12), Setor.COZINHA));
+    }
 
     /**
      * Método para encontar um usuário com base em seu e-mail.
@@ -73,7 +70,7 @@ public class GerenciaUsuario {
     public boolean removeLogin(String email) {
         Usuario usuario = encontrarUsuario(email);
         if (usuario != null) {
-            return usuarios.remove(email, usuario);//remove o usuario encontrado a partir da chave passada
+            return usuarios.remove(email, usuario);
         }
         return false;
     }
@@ -108,5 +105,15 @@ public class GerenciaUsuario {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Esse método faz a listagem dos usuários dastrados.
+     *
+     */
+    public void Listar() {
+        for (String map : usuarios.keySet()) {
+            System.out.println(usuarios.get(map));
+        }
     }
 }

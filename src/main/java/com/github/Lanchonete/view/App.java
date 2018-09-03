@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 
+
 import main.java.com.github.Lanchonete.controller.GerenciaUsuario;
 import main.java.com.github.Lanchonete.controller.Menu;
 import main.java.com.github.Lanchonete.model.Produto;
@@ -40,7 +41,7 @@ public class App {
             System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::");
             System.out.println(":::::::::::::::::::::LANCHONETE::::::::::::::::::");
             System.out.println(":::::::::::::::::::::::::::::::::::::::::::::::::\n");
-            System.out.print("       (1)ENTRAR        (2)CADASTRE-SE \n\n ~ ");
+            System.out.print("       <(1)ENTRAR>        <(2)CADASTRE-SE>  \n ~ ");
             i = ler.nextInt();
             if (i == 1) {
                 System.out.print("DIGITE O SEU E-MAIL DE USUÁRIO: ");
@@ -52,17 +53,18 @@ public class App {
             if (i == 1 && usuario.Autenticacao(username, password)) {
                 while (fechar) {
                     System.out.println("::::::::::::::::::::::::::::::::::::MENU:::::::::::::::::::::::::::::::::::::::");
-                    System.out.print("(1)CARDÁPIO   (2)XXXXX   (3)USUÁRIOS   (4)XXXXX   (5)XXXXX   (0)SAIR \n\n ~ ");
+                    System.out.print("<(1)PRODUTOS>  <(2)XXXXX>  <(3)USUÁRIOS>  <(4)XXXXX>  <(5)XXXXX>  <(0)SAIR> \n ~ ");
                     i = ler.nextInt();
 
                     if (i == 1) {
 
-                        System.out.print("\n::::::::::::::::PRODUTOS DISPONÍVEIS:::::::::::\n");
-                        for (Produto p : menu.listarProdutos()) {
+                        System.out.print("\n::::::::::::::::::::::::::::::PRODUTOS DISPONÍVEIS:::::::::::::::::::::::::");
+                        /*LISTAGEM DOS PRODUTOS DISPONÍVEIS*/
+                        for(Produto p : menu.listarProdutos()) {
                             System.out.println(p);
                         }
-                        System.out.println("::::::::::::::::::::::::PRODUTOS:::::::::::::::::::::");
-                        System.out.print("(1)SALVAR     (2)EXCLUIR     (3)EDITAR     (0)SAIR \n\n ~ ");
+                        System.out.println(":::::::::::::::::::::::::::::PAINEL DO ADMINISTRADOR:::::::::::::::::::::::");
+                        System.out.print("(1)SALVAR     (2)EXCLUIR     (3)EDITAR     (0)SAIR \n ~ ");
                         i = ler.nextInt();
                         if (i >= 1 && i <= 3) {
                             System.out.print("DIGITE O CÓDIGO DO PRODUTO:");
@@ -85,10 +87,11 @@ public class App {
                             System.out.println(menu.excluirProduto(codigoProduto));
                         }
                     } else if (i == 3) {
-                        System.out.println(":::::::::::::::::::::::::::::USUÁRIOS::::::::::::::::::::::::::::::");
-                        /*Listar os usuáios...*/
-                  
-                        System.out.print("(1)EDITAR USUÁRIO     (2)EXCLUIR USUÁRIO    (0)SAIR \n\n ~ ");
+                        System.out.println(":::::::::::::::::::::::::::::::::::::::::USUÁRIOS:::::::::::::::::::::::::::::::");
+                        /*LISTAGEM DOS USUÁRIOS JÁ DASTRADOS*/
+                        usuario.Listar();
+                        System.out.println(":::::::::::::::::::::::::::::::::PAINEL DO ADMINISTRADOR::::::::::::::::::::::::");
+                        System.out.print("(1)EDITAR USUÁRIO     (2)EXCLUIR USUÁRIO    (0)SAIR \n ~ ");
                         i = ler.nextInt();
                         
                         if (i == 1 || i == 2) {
@@ -96,9 +99,9 @@ public class App {
                             username = ler.next();
                         }
                         if (i == 1) {
-                            System.out.println(usuario.uptadeUsuario(username, cadastrarNovoUsuario(ler)));
+                            usuario.uptadeUsuario(username, cadastrarNovoUsuario(ler));
                         } else if (i == 2) {
-                            System.out.println(usuario.removeLogin(username));
+                            usuario.removeLogin(username);
                         }
                
                        
@@ -109,7 +112,10 @@ public class App {
             } else if (i == 2) {
                 usuario.addLogin(cadastrarNovoUsuario(ler));
             }
-            fechar = true;
+            
+                fechar = true;
+            
+            
         }
     }
 
