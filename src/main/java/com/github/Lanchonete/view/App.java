@@ -4,8 +4,6 @@ package main.java.com.github.Lanchonete.view;
 import java.time.LocalDate;
 import java.util.Scanner;
 
-
-
 import main.java.com.github.Lanchonete.controller.GerenciaUsuario;
 import main.java.com.github.Lanchonete.controller.Menu;
 import main.java.com.github.Lanchonete.model.Produto;
@@ -56,66 +54,65 @@ public class App {
                     System.out.print("<(1)PRODUTOS>  <(2)XXXXX>  <(3)USUÁRIOS>  <(4)XXXXX>  <(5)XXXXX>  <(0)SAIR> \n ~ ");
                     i = ler.nextInt();
 
-                    if (i == 1) {
-
-                        System.out.print("\n::::::::::::::::::::::::::::::PRODUTOS DISPONÍVEIS:::::::::::::::::::::::::");
-                        /*LISTAGEM DOS PRODUTOS DISPONÍVEIS*/
-                        for(Produto p : menu.listarProdutos()) {
-                            System.out.println(p);
-                        }
-                        System.out.println(":::::::::::::::::::::::::::::PAINEL DO ADMINISTRADOR:::::::::::::::::::::::");
-                        System.out.print("(1)SALVAR     (2)EXCLUIR     (3)EDITAR     (0)SAIR \n ~ ");
-                        i = ler.nextInt();
-                        if (i >= 1 && i <= 3) {
-                            System.out.print("DIGITE O CÓDIGO DO PRODUTO:");
-                            codigoProduto = ler.nextInt();
-                        }
-                        ler.nextLine();
-                        if (i == 1 || i == 3) {
-                            System.out.print("DIGITE O NOME DO PRODUTO : ");
-                            String nomeProduto = ler.nextLine();
-                            System.out.print("DIGITE A DESCRIÇÃO DO PRODUTO : ");
-                            String descricaoProduto = ler.nextLine();
-                            System.out.print("DIGITE O PREÇO DO PRODUTO : ");
-                            float precoProduto = ler.nextFloat();
-                            if (i == 1) {
-                                System.out.println(menu.adicionarProduto(new Produto(codigoProduto, nomeProduto, descricaoProduto, precoProduto)));
-                            } else if (i == 3) {
-                                System.out.println(menu.editarProduto(codigoProduto, new Produto(codigoProduto, nomeProduto, descricaoProduto, precoProduto)));
+                    switch (i) {
+                        case 1:
+                            System.out.print("\n::::::::::::::::::::::::::::::PRODUTOS DISPONÍVEIS:::::::::::::::::::::::::");
+                            /*LISTAGEM DOS PRODUTOS DISPONÍVEIS*/
+                            for (Produto p : menu.listarProdutos()) {
+                                System.out.println(p);
                             }
-                        } else if (i == 2) {
-                            System.out.println(menu.excluirProduto(codigoProduto));
-                        }
-                    } else if (i == 3) {
-                        System.out.println(":::::::::::::::::::::::::::::::::::::::::USUÁRIOS:::::::::::::::::::::::::::::::");
-                        /*LISTAGEM DOS USUÁRIOS JÁ DASTRADOS*/
-                        usuario.Listar();
-                        System.out.println(":::::::::::::::::::::::::::::::::PAINEL DO ADMINISTRADOR::::::::::::::::::::::::");
-                        System.out.print("(1)EDITAR USUÁRIO     (2)EXCLUIR USUÁRIO    (0)SAIR \n ~ ");
-                        i = ler.nextInt();
-                        
-                        if (i == 1 || i == 2) {
-                            System.out.print("DIGITE O E-MAIL DE USUÁRIO DO USUÁRIO QUE VOCÊ DESEJA ALTERAR : ");
-                            username = ler.next();
-                        }
-                        if (i == 1) {
-                            usuario.uptadeUsuario(username, cadastrarNovoUsuario(ler));
-                        } else if (i == 2) {
-                            usuario.removeLogin(username);
-                        }
-               
-                       
-                    } else {
-                        fechar = false;
+                            System.out.println(":::::::::::::::::::::::::::::PAINEL DO ADMINISTRADOR:::::::::::::::::::::::");
+                            System.out.print("(1)SALVAR     (2)EXCLUIR     (3)EDITAR     (0)SAIR \n ~ ");
+                            i = ler.nextInt();
+                            if (i >= 1 && i <= 3) {
+                                System.out.print("DIGITE O CÓDIGO DO PRODUTO:");
+                                codigoProduto = ler.nextInt();
+                            }
+                            ler.nextLine();
+                            if (i == 1 || i == 3) {
+                                System.out.print("DIGITE O NOME DO PRODUTO : ");
+                                String nomeProduto = ler.nextLine();
+                                System.out.print("DIGITE A DESCRIÇÃO DO PRODUTO : ");
+                                String descricaoProduto = ler.nextLine();
+                                System.out.print("DIGITE O PREÇO DO PRODUTO : ");
+                                float precoProduto = ler.nextFloat();
+                                if (i == 1) {
+                                    System.out.println(menu.adicionarProduto(new Produto(codigoProduto, nomeProduto, descricaoProduto, precoProduto)));
+                                } else if (i == 3) {
+                                    System.out.println(menu.editarProduto(codigoProduto, new Produto(codigoProduto, nomeProduto, descricaoProduto, precoProduto)));
+                                }
+                            } else if (i == 2) {
+                                System.out.println(menu.excluirProduto(codigoProduto));
+                            }
+                            break;
+                        case 3:
+                            System.out.println(":::::::::::::::::::::::::::::::::::::::::USUÁRIOS:::::::::::::::::::::::::::::::");
+                            /*LISTAGEM DOS USUÁRIOS JÁ DASTRADOS*/
+                            usuario.Listar();
+                            System.out.println(":::::::::::::::::::::::::::::::::PAINEL DO ADMINISTRADOR::::::::::::::::::::::::");
+                            System.out.print("(1)EDITAR USUÁRIO     (2)EXCLUIR USUÁRIO    (0)SAIR \n ~ ");
+                            i = ler.nextInt();
+                            if (i == 1 || i == 2) {
+                                System.out.print("DIGITE O E-MAIL DE USUÁRIO DO USUÁRIO QUE VOCÊ DESEJA ALTERAR : ");
+                                username = ler.next();
+                            }
+                            if (i == 1) {
+                                usuario.uptadeUsuario(username, cadastrarNovoUsuario(ler));
+                            } else if (i == 2) {
+                                usuario.removeLogin(username);
+                            }
+                            break;
+                        default:
+                            fechar = false;
+                            break;
                     }
                 }
             } else if (i == 2) {
                 usuario.addLogin(cadastrarNovoUsuario(ler));
             }
-            
-                fechar = true;
-            
-            
+
+            fechar = true;
+
         }
     }
 
@@ -125,6 +122,7 @@ public class App {
             System.out.println("");
         }
     }
+
     /*Construindo*/
     static LocalDate informeData(Scanner ler) {
         System.out.print("DIGITE O ANO :");

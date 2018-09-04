@@ -28,7 +28,6 @@ public class GerenciaUsuario {
 
         /*Adicionando o gerente para teste.*/
         addLogin(new Usuario("111.111.111-11", "Administrador", "admin@gmail.com", "admin", "9999-9999", LocalDate.of(1996, Month.AUGUST, 12), Setor.GERENCIA));
-        addLogin(new Usuario("111.111.111-11", "Diones Gomes", "diones@gmail.com", "123", "8888-8888", LocalDate.of(1996, Month.AUGUST, 12), Setor.COZINHA));
     }
 
     /**
