@@ -18,13 +18,14 @@ import main.java.com.github.Lanchonete.model.Usuario;
 
 public class App {
 
+    /*
     public static void main(String[] args) {
 
         Scanner ler = new Scanner(System.in);
         GerenciaUsuario usuario = new GerenciaUsuario();
         Menu menu = new Menu();
 
-        /*ADICIONANDO PRODUTOS PARA EFETUAR OS TESTES*/
+        /*ADICIONANDO PRODUTOS PARA EFETUAR OS TESTES 
         menu.adicionarProduto(new Produto(01, "Agua", "500ml", 3.00f));
         menu.adicionarProduto(new Produto(02, "Suco", "MARACUJÁ", 2.80f));
         menu.adicionarProduto(new Produto(03, "Refrigerente", "Coca-cola", 1.80f));
@@ -57,7 +58,7 @@ public class App {
                     switch (i) {
                         case 1:
                             System.out.print("\n::::::::::::::::::::::::::::::PRODUTOS DISPONÍVEIS:::::::::::::::::::::::::");
-                            /*LISTAGEM DOS PRODUTOS DISPONÍVEIS*/
+                            /*LISTAGEM DOS PRODUTOS DISPONÍVEIS
                             for (Produto p : menu.listarProdutos()) {
                                 System.out.println(p);
                             }
@@ -87,7 +88,7 @@ public class App {
                             break;
                         case 3:
                             System.out.println(":::::::::::::::::::::::::::::::::::::::::USUÁRIOS:::::::::::::::::::::::::::::::");
-                            /*LISTAGEM DOS USUÁRIOS JÁ DASTRADOS*/
+                            /*LISTAGEM DOS USUÁRIOS JÁ DASTRADOS
                             usuario.Listar();
                             System.out.println(":::::::::::::::::::::::::::::::::PAINEL DO ADMINISTRADOR::::::::::::::::::::::::");
                             System.out.print("(1)EDITAR USUÁRIO     (2)EXCLUIR USUÁRIO    (0)SAIR \n ~ ");
@@ -116,12 +117,12 @@ public class App {
         }
     }
 
-    /*Métodos estáticos.*/
+    /*Métodos estáticos.
     public static void limparTela() {
         for (int i = 0; i < 100; i++) {
             System.out.println("");
         }
-    }
+    }*/
 
     /*Construindo*/
     static LocalDate informeData(Scanner ler) {
