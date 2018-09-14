@@ -15,13 +15,13 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import main.java.com.github.Lanchonete.model.Usuario;
+import main.java.com.github.Lanchonete.model.Produto;
 
 /**
- * Esta classe é responsável por persistir os dados em um arquivo binário.
+ *
  * @author Diones Gomes
- */ 
-public class CadastroUsuarioArquivo {
+ */
+public class CadastrarProdutoArquivo {
 
     private final File arquivo;
 /**
@@ -29,8 +29,8 @@ public class CadastroUsuarioArquivo {
  * @author Diones Gomes
  * 
  */
-    public CadastroUsuarioArquivo() {
-        arquivo = new File("Usuario.bin");
+    public CadastrarProdutoArquivo() {
+        arquivo = new File("Produto.bin");
 
         if (!arquivo.exists()) {
 
@@ -45,29 +45,29 @@ public class CadastroUsuarioArquivo {
     }
  /**
   * 
-  * @param usuario parãmetro 
+  * @param produto parãmetro 
   * @return true se o usuário for cadastrado, false se não.
   * @throws FileNotFoundException
   * @throws IOException
   * @throws ClassNotFoundException 
   */
-    public boolean Adicionar(Usuario usuario) throws FileNotFoundException, IOException, ClassNotFoundException {
-        List<Usuario> usuarios;
+    public boolean Adicionar(Produto produto) throws FileNotFoundException, IOException, ClassNotFoundException {
+        List<Produto> produtos;
 
         if (arquivo.length() > 0) {
             ObjectInputStream in = new ObjectInputStream(
                     new FileInputStream(arquivo));
 
-            usuarios = (List<Usuario>) in.readObject();
+            produtos = (List<Produto>) in.readObject();
         } else {
-            usuarios = new ArrayList<>();
+            produtos = new ArrayList<>();
         }
 
-        if (usuarios.add(usuario)) {
+        if (produtos.add(produto)) {
             ObjectOutputStream out = new ObjectOutputStream(
                     new FileOutputStream(arquivo));
 
-            out.writeObject(usuarios);
+            out.writeObject(produtos);
             out.close();
 
             return true;
@@ -78,16 +78,16 @@ public class CadastroUsuarioArquivo {
 
     }
 
-    public Usuario buscar(String email) throws IOException, ClassNotFoundException {
+    public Produto buscar(Integer codigo) throws IOException, ClassNotFoundException {
 
         if (arquivo.length() > 0) {
             ObjectInputStream in = new ObjectInputStream(
                     new FileInputStream(arquivo));
 
-            List<Usuario> lista = (List<Usuario>) in.readObject();
-            for (Usuario u : lista) {
-                if (u.getEmail().equals(email)) {
-                    return u;
+            List<Produto> lista = (List<Produto>) in.readObject();
+            for (Produto p : lista) {
+                if (p.getCodigo()== codigo) { /*Verifica se o código passado é igual ao código do produto armazenado*/
+                    return p;
                 }
             }
 
@@ -96,60 +96,44 @@ public class CadastroUsuarioArquivo {
 
     }
 
-    public List<Usuario> listar() throws IOException, ClassNotFoundException {
+    public List<Produto> listar() throws IOException, ClassNotFoundException {
 
         if (arquivo.length() > 0) {
             ObjectInputStream in = new ObjectInputStream(
                     new FileInputStream(arquivo));
 
-            return (List<Usuario>) in.readObject();
+            return (List<Produto>) in.readObject();
         } else {
             return new ArrayList<>();
         }
 
     }
 
-    public boolean Autenticacao(String email, String senha) throws IOException, ClassNotFoundException {
-        try {
-            Usuario usuario = buscar(email);
-            if (usuario.getSenha().equals(senha)) {
-                return true;
-            }
-        } catch (NullPointerException ex) {
-            System.out.println("Login ou Senha inválido!");
-        }
+    public boolean atualizar(Produto produto ,Integer codigo) throws IOException, ClassNotFoundException {
 
-        return false;
-    }
-
-    public boolean atualizar(String email, Usuario u) throws IOException, ClassNotFoundException {
-
-        List<Usuario> usuario;
+        List<Produto> produtos;
 
         if (arquivo.length() > 0) {
             ObjectInputStream in = new ObjectInputStream(
                     new FileInputStream(arquivo));
 
-            usuario = (List<Usuario>) in.readObject();
+            produtos = (List<Produto>) in.readObject();
         } else {
-            usuario = new ArrayList<>();
+            produtos = new ArrayList<>();
         }
 
-        for (int i = 0; i < usuario.size(); i++) {
+        for (int i = 0; i < produtos.size(); i++) {
 
-            if (usuario.get(i).getEmail().equals(email)) {
+            if (produtos.get(i).getCodigo() == codigo) {
 
-                usuario.get(i).setCpf(u.getCpf());
-                usuario.get(i).setEmail(u.getEmail());
-                usuario.get(i).setNome(u.getNome());
-                usuario.get(i).setSenha(u.getSenha());
-                usuario.get(i).setSetor(u.getSetor());
-                usuario.get(i).setTelefone(u.getTelefone());
-                usuario.get(i).setNascimento(u.getNascimento());
-
+                produtos.get(i).setCodigo(produto.getCodigo());
+                produtos.get(i).setNome(produto.getNome());
+                produtos.get(i).setDescricao(produto.getDescricao());
+                produtos.get(i).setPreco(produto.getPreco());
+                
                 ObjectOutputStream out = new ObjectOutputStream(
                         new FileOutputStream(arquivo));
-                out.writeObject(usuario);
+                out.writeObject(produtos);
                 out.close();
 
                 return true;
@@ -161,25 +145,25 @@ public class CadastroUsuarioArquivo {
 
     }
 
-    public boolean deletar(String email) throws IOException, ClassNotFoundException {
+    public boolean deletar(Integer codigo) throws IOException, ClassNotFoundException {
 
-        List<Usuario> usuario;
+        List<Produto> produtos;
 
         if (arquivo.length() > 0) {
             ObjectInputStream in = new ObjectInputStream(
                     new FileInputStream(arquivo));
 
-            usuario = (List<Usuario>) in.readObject();
+            produtos = (List<Produto>) in.readObject();
         } else {
             return false;
         }
 
-        for (int i = 0; i < usuario.size(); i++) {
+        for (int i = 0; i < produtos.size(); i++) {
 
-            if (usuario.get(i).getEmail().equals(email)) {
-                usuario.remove(i);
+            if (produtos.get(i).getCodigo()== codigo) {
+                produtos.remove(i);
                 ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(arquivo));
-                out.writeObject(usuario);
+                out.writeObject(produtos);
                 out.close();
                 return true;
             }
@@ -188,5 +172,4 @@ public class CadastroUsuarioArquivo {
         return false;
 
     }
-
 }

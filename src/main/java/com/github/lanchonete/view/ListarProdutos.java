@@ -5,28 +5,17 @@
  */
 package main.java.com.github.lanchonete.view;
 
-import java.io.IOException;
-import java.util.List;
-import javax.swing.JOptionPane;
-import main.java.com.github.Lanchonete.model.Usuario;
-import main.java.com.github.lanchonete.controller.CadastroUsuarioArquivo;
-import main.java.com.github.lanchonete.model.Table;
-
 /**
  *
  * @author Diones Gomes
  */
-public class ListarContas extends javax.swing.JFrame {
+public class ListarProdutos extends javax.swing.JFrame {
 
     /**
-     * Creates new form ListarContas
+     * Creates new form ListarProdutos
      */
-    public CadastroUsuarioArquivo cad = new CadastroUsuarioArquivo();
-    public Table tabela = new Table();
-
-    public ListarContas() {
+    public ListarProdutos() {
         initComponents();
-        incializarTabela();
     }
 
     /**
@@ -38,17 +27,12 @@ public class ListarContas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
         jScrollPane1 = new javax.swing.JScrollPane();
         listarUsuario = new javax.swing.JTable();
-
-        jMenu1.setText("jMenu1");
-
-        jMenu2.setText("jMenu2");
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Listando contas de usuários");
+        setTitle("Listando produtos");
         setResizable(false);
 
         listarUsuario.setModel(new javax.swing.table.DefaultTableModel(
@@ -56,14 +40,14 @@ public class ListarContas extends javax.swing.JFrame {
 
             },
             new String [] {
-                "CPF", "Nome", "Email", "Telefone", "Data de Dascimento", "Setor", "Senha"
+                "Código", "Nome", "Descrição", "Preço"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -76,15 +60,26 @@ public class ListarContas extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(listarUsuario);
 
+        jButton1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jButton1.setText("Excluir produto");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 835, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 835, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(309, 309, 309))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 500, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+                .addGap(5, 5, 5))
         );
 
         pack();
@@ -93,25 +88,8 @@ public class ListarContas extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable listarUsuario;
     // End of variables declaration//GEN-END:variables
-
-    private void incializarTabela() {
-
-        try {
-            List<Usuario> lista = null;
-
-            lista = cad.listar();
-
-            tabela.addList(lista);
-            listarUsuario.setModel(tabela);
-        } catch (IOException | ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "Falha na conexão com arquivo",
-                    "Mensagem Erro", JOptionPane.ERROR_MESSAGE);
-
-        }
-    }
 }

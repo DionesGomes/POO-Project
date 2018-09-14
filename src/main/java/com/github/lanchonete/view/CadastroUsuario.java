@@ -5,31 +5,35 @@
  */
 package main.java.com.github.lanchonete.view;
 
+import main.java.com.github.lanchonete.exceptions.FormularioException;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import jdk.nashorn.internal.runtime.regexp.joni.exception.JOniException;
+import javax.swing.JOptionPane;
 import main.java.com.github.Lanchonete.controller.GerenciaUsuario;
 import main.java.com.github.Lanchonete.model.Setor;
 import main.java.com.github.Lanchonete.model.Usuario;
 import main.java.com.github.lanchonete.controller.CadastroUsuarioArquivo;
 
 /**
- *
+ * Esta classe é responsável por cadastrar um novo usuário.
  * @author Diones Gomes
  */
 public class CadastroUsuario extends javax.swing.JFrame {
 
     /**
-     * Creates new form CadastroUsuario
+     * Criando um novo CadastroUsuario
      */
     public CadastroUsuario() {
         initComponents();
     }
 
+    /**
+     * Instânciando usuário.
+     */
     GerenciaUsuario usuario = new GerenciaUsuario();
 
     /**
@@ -248,14 +252,19 @@ public class CadastroUsuario extends javax.swing.JFrame {
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
         try {
             /*Cadastrar novo Usuário*/
+            verificarCampos();
             CadastrarUsuario();
-            /*Método para cadastrar um novo usuário.*/
+
+            
         } catch (IOException ex) {
             Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        usuario.Listar();
+        } catch (FormularioException ex) {
+           JOptionPane.showMessageDialog(null, ex.getMessage(), "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);        }
+        /*Método para listar o usuário cadastrado*/
+        //usuario.Listar();
+        this.dispose();
 
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
@@ -326,10 +335,36 @@ public class CadastroUsuario extends javax.swing.JFrame {
         Usuario usuario = new Usuario(cpf, nome, email, senha, telefone, datanascimento, s);
 
         CadastroUsuarioArquivo cad = new CadastroUsuarioArquivo();
-        if (cad.Adicionar(usuario)) {
-            System.out.println("deu certo");
+        cad.Adicionar(usuario);       
+    }
+
+    private void verificarCampos() throws FormularioException {
+
+        if (jFormattedTextFieldCPF.getText().equals("")) {
+            throw new FormularioException("O compo CPF não pode estar vazio!");
+        }
+        
+        if (jTextFieldNome.getText().equals("")) {
+            throw new FormularioException("O campo NOME não pode estar vazio");
         }
 
-        //System.out.println(usuario.toString());
+        if (jTextFieldEmail.getText().equals("")) {
+            throw new FormularioException("O campo E-MAIL não pode estar vazio!");
+        }
+
+        if (String.copyValueOf(jPasswordFieldSenha.getPassword()).equals("")) {
+            throw new FormularioException("O campo SENHA não pode estar vazio!");
+        }
+
+        if (jFormattedTextFieldTelefone.getText().equals("")) {
+            throw new FormularioException("O campo TELEFONE não pode estar vazio!");
+        }
+        
+        if (jFormattedTextFieldNascimento.getText().equals("")) {
+            throw new FormularioException("O campo DATA de NASCIMENTO não pode estar vazio!");
+        }    
+        
+
     }
+
 }

@@ -7,10 +7,8 @@ package main.java.com.github.lanchonete.view;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import static java.time.temporal.TemporalQueries.localDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import main.java.com.github.Lanchonete.model.Setor;
@@ -312,17 +310,17 @@ public class EditarUsuario extends javax.swing.JFrame {
     private void preencherCampos() {
 
         CadastroUsuarioArquivo cad = new CadastroUsuarioArquivo();
-        Usuario u;
+        Usuario usuario;
         try {
 
-            u = cad.buscar(email);
-            cpf.setText(u.getCpf());
-            nome.setText(u.getNome());
-            textEmail.setText(u.getEmail());
-            telefone.setText(u.getTelefone());
-            senha.setText(u.getSenha());
+            usuario = cad.buscar(email);
+            cpf.setText(usuario.getCpf());
+            nome.setText(usuario.getNome());
+            textEmail.setText(usuario.getEmail());
+            telefone.setText(usuario.getTelefone());
+            senha.setText(usuario.getSenha());
 
-            LocalDate nas = u.getNascimento();
+            LocalDate nas = usuario.getNascimento();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             String dnascimento = nas.format(formatter);
             nascimento.setText(dnascimento);

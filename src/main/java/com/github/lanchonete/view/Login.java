@@ -5,6 +5,7 @@
  */
 package main.java.com.github.lanchonete.view;
 
+import main.java.com.github.lanchonete.exceptions.FormularioException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -148,21 +149,25 @@ public class Login extends javax.swing.JFrame {
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
         try {
             /*Ação do botão "Entrar"*/
+            verificaCampo();
             if (cad.Autenticacao(jTextFieldEmail.getText(), new String(jPasswordFieldSenha.getPassword()))) {
                 TelaPrincipal princiapal = new TelaPrincipal(jTextFieldEmail.getText());
                 princiapal.setVisible(true);
                 this.dispose();
             } else {
                 JOptionPane.showMessageDialog(null, "Login ou Senha invalido!");
+                /*Setando null, para limpar o campo de password*/
                 jTextFieldEmail.setText(" ");
                 jPasswordFieldSenha.setText(null);
-                /*Setando null, para limpar o campo de password*/
+                
 
             }
         } catch (IOException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FormularioException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);   
         }
 
 
@@ -232,4 +237,14 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldEmail;
     // End of variables declaration//GEN-END:variables
+
+    private void verificaCampo()throws FormularioException{
+        if (jTextFieldEmail.getText().equals("")) {
+            throw new FormularioException("O compo E-EMAIL não pode estar vazio!");
+        }
+        
+        if (String.copyValueOf(jPasswordFieldSenha.getPassword()).equals("")) {
+            throw new FormularioException("O campo SENHA não pode estar vazio");
+        }
+    }
 }
