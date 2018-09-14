@@ -5,8 +5,12 @@
  */
 package main.java.com.github.lanchonete.view;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import main.java.com.github.Lanchonete.controller.GerenciaUsuario;
+import main.java.com.github.lanchonete.controller.CadastroUsuarioArquivo;
 
 
 /**
@@ -20,7 +24,9 @@ public class Login extends javax.swing.JFrame {
         initComponents();
     }
     
-    GerenciaUsuario usuario = new GerenciaUsuario();
+    CadastroUsuarioArquivo cad = new CadastroUsuarioArquivo();
+
+    
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -144,27 +150,37 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
-        /*Ação do botão "Entrar"*/
-         if(usuario.Autenticacao(jTextFieldEmail.getText(),new String(jPasswordFieldSenha.getPassword()))){
-           TelaPrincipal princiapal = new TelaPrincipal();           
-           princiapal.setVisible(true);
-           this.dispose();
-       }else{
-             JOptionPane.showMessageDialog(null, "Login ou Senha invalido!");
-             
-       }
+        try {
+            /*Ação do botão "Entrar"*/
+            if(cad.Autenticacao(jTextFieldEmail.getText(),new String(jPasswordFieldSenha.getPassword()))){
+                TelaPrincipal princiapal = new TelaPrincipal(jTextFieldEmail.getText());
+                princiapal.setVisible(true);
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(null, "Login ou Senha invalido!");
+                jTextFieldEmail.setText(" ");
+                jPasswordFieldSenha.setText(null); /*Setando null, para limpar o campo de password*/
+                
+            }} catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
         
        
     }//GEN-LAST:event_jButtonEntrarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
         // TODO add your handling code here:
+        
         dispose();
        
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastroActionPerformed
-        // TODO add your handling code here:
+        /*Cadastrar novo Usuário*/ 
        new CadastroUsuario().setVisible(true);
        
     }//GEN-LAST:event_jButtonCadastroActionPerformed

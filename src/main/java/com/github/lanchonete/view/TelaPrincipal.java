@@ -14,7 +14,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form Main
      */
+    private String email;
+    
     public TelaPrincipal() {
+        initComponents();
+    }
+
+    TelaPrincipal(String text) {
+        this.email = text;
         initComponents();
     }
 
@@ -207,7 +214,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         * Esse botão é responsável por chamar a tela de EditarUsuário.
         */            
        
-       new EditarUsuario().setVisible(true);
+       new EditarUsuario(email).setVisible(true);
        
         
     }//GEN-LAST:event_jButtonGerenciaContasActionPerformed

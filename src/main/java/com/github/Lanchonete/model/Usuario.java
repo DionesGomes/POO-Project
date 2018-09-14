@@ -2,6 +2,7 @@ package main.java.com.github.Lanchonete.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Objects;
 
 /**
  * A classe Usuario modela a entidade Usuário
@@ -97,6 +98,57 @@ public class Usuario implements Serializable {
         this.senha = senha;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 19 * hash + Objects.hashCode(this.cpf);
+        hash = 19 * hash + Objects.hashCode(this.nome);
+        hash = 19 * hash + Objects.hashCode(this.email);
+        hash = 19 * hash + Objects.hashCode(this.telefone);
+        hash = 19 * hash + Objects.hashCode(this.nascimento);
+        hash = 19 * hash + Objects.hashCode(this.setor);
+        hash = 19 * hash + Objects.hashCode(this.senha);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario other = (Usuario) obj;
+        if (!Objects.equals(this.cpf, other.cpf)) {
+            return false;
+        }
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.telefone, other.telefone)) {
+            return false;
+        }
+        if (!Objects.equals(this.senha, other.senha)) {
+            return false;
+        }
+        if (!Objects.equals(this.nascimento, other.nascimento)) {
+            return false;
+        }
+        if (this.setor != other.setor) {
+            return false;
+        }
+        return true;
+    }
+    
+    
+    
     @Override
     public String toString() {
         return "Usuario{" + "cpf = " + cpf + ", nome = " + nome + ", email = " + email + ", telefone = "

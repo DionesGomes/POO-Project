@@ -99,10 +99,15 @@ public class GerenciaUsuario {
      * @return true ou false.
      */
     public boolean Autenticacao(String email, String senha) {
-        Usuario usuario = encontrarUsuario(email);
-        if (usuario.getSenha().equals(senha)) {
-            return true;
+        try {
+            Usuario usuario = encontrarUsuario(email);
+            if (usuario.getSenha().equals(senha)) {
+                return true;
+            }
+        } catch (NullPointerException ex) {
+            System.out.println("Login ou Senha inválido!");
         }
+
         return false;
     }
 
