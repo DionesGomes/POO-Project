@@ -154,7 +154,7 @@ public class Mesa extends javax.swing.JFrame {
 
     private void jButtonNovaComandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovaComandaActionPerformed
         /*Nova comanda*/
-        JOptionPane.showMessageDialog(null, "Nova comanda criada para a mesa"+" 3");
+        JOptionPane.showMessageDialog(null, "Nova comanda criada para a mesa" + " 3");
     }//GEN-LAST:event_jButtonNovaComandaActionPerformed
 
     private void jButtonVerPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerPedidosActionPerformed
@@ -167,11 +167,10 @@ public class Mesa extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonFazerPedidosActionPerformed
 
     private void jButtonEncerrarComandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEncerrarComandaActionPerformed
-        /*Encerrar a comanda*/ 
-        JOptionPane.showMessageDialog(null, "Comanda encerrada com sucesso. Total: R$ "+"100");
+        /*Encerrar a comanda*/
+        JOptionPane.showMessageDialog(null, "Comanda encerrada com sucesso. Total: R$ " + "100");
     }//GEN-LAST:event_jButtonEncerrarComandaActionPerformed
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonEncerrarComanda;

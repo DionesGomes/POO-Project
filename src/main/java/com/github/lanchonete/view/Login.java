@@ -12,22 +12,18 @@ import javax.swing.JOptionPane;
 import main.java.com.github.Lanchonete.controller.GerenciaUsuario;
 import main.java.com.github.lanchonete.controller.CadastroUsuarioArquivo;
 
-
 /**
  *
  * @author Diones Gomes
  */
 public class Login extends javax.swing.JFrame {
 
-   
     public Login() {
         initComponents();
     }
-    
+
     CadastroUsuarioArquivo cad = new CadastroUsuarioArquivo();
 
-    
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -152,40 +148,46 @@ public class Login extends javax.swing.JFrame {
     private void jButtonEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEntrarActionPerformed
         try {
             /*Ação do botão "Entrar"*/
-            if(cad.Autenticacao(jTextFieldEmail.getText(),new String(jPasswordFieldSenha.getPassword()))){
+            if (cad.Autenticacao(jTextFieldEmail.getText(), new String(jPasswordFieldSenha.getPassword()))) {
                 TelaPrincipal princiapal = new TelaPrincipal(jTextFieldEmail.getText());
                 princiapal.setVisible(true);
                 this.dispose();
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, "Login ou Senha invalido!");
                 jTextFieldEmail.setText(" ");
-                jPasswordFieldSenha.setText(null); /*Setando null, para limpar o campo de password*/
-                
-            }} catch (IOException ex) {
+                jPasswordFieldSenha.setText(null);
+                /*Setando null, para limpar o campo de password*/
+
+            }
+        } catch (IOException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
-        
-       
     }//GEN-LAST:event_jButtonEntrarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        // TODO add your handling code here:
-        
-        dispose();
-       
+        try {
+            // TODO add your handling code here:
+
+            System.out.println(cad.listar().toString());
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
     private void jButtonCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastroActionPerformed
-        /*Cadastrar novo Usuário*/ 
-       new CadastroUsuario().setVisible(true);
-       
+        /*Cadastrar novo Usuário*/
+        new CadastroUsuario().setVisible(true);
+
     }//GEN-LAST:event_jButtonCadastroActionPerformed
 
-    
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -217,8 +219,8 @@ public class Login extends javax.swing.JFrame {
             }
         });
     }
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCadastro;
     private javax.swing.JButton jButtonCancelar;

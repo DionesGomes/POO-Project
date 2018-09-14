@@ -5,6 +5,7 @@
  */
 package main.java.com.github.lanchonete.view;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -12,6 +13,7 @@ import java.time.format.DateTimeFormatter;
 import static java.time.temporal.TemporalQueries.localDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import main.java.com.github.Lanchonete.model.Setor;
 import main.java.com.github.Lanchonete.model.Usuario;
 import main.java.com.github.lanchonete.controller.CadastroUsuarioArquivo;
 
@@ -25,7 +27,7 @@ public class EditarUsuario extends javax.swing.JFrame {
      * Creates new form EditarUsuario
      */
     private String email;
-    
+
     public EditarUsuario() {
         initComponents();
     }
@@ -61,13 +63,15 @@ public class EditarUsuario extends javax.swing.JFrame {
         telefone = new javax.swing.JFormattedTextField();
         nascimento = new javax.swing.JFormattedTextField();
         setor = new javax.swing.JComboBox<>();
+        jLabel8 = new javax.swing.JLabel();
+        senha = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar Usuários");
         setResizable(false);
 
         jButtonCadastrar.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jButtonCadastrar.setText("Cadastrar");
+        jButtonCadastrar.setText("Atualizar");
         jButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonCadastrarActionPerformed(evt);
@@ -139,6 +143,15 @@ public class EditarUsuario extends javax.swing.JFrame {
         setor.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         setor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Atendimento", "Cozinha", "Caixa", "Gerencia" }));
 
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel8.setText("Senha");
+
+        senha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                senhaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -156,7 +169,8 @@ public class EditarUsuario extends javax.swing.JFrame {
                             .addComponent(jLabel6)
                             .addComponent(jLabel5)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel3))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel8))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -168,30 +182,35 @@ public class EditarUsuario extends javax.swing.JFrame {
                             .addComponent(textEmail)
                             .addComponent(telefone)
                             .addComponent(nascimento)
-                            .addComponent(setor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(65, 73, Short.MAX_VALUE))
+                            .addComponent(setor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(senha))))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(nome, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(16, 16, 16)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8)
+                        .addGap(40, 40, 40)
                         .addComponent(jLabel5))
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(senha, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(13, 13, 13)
                         .addComponent(telefone, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -225,7 +244,7 @@ public class EditarUsuario extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
+                .addContainerGap(38, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
         );
@@ -248,8 +267,15 @@ public class EditarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonCancelar1ActionPerformed
 
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
-        // TODO add your handling code here:
-       
+        try {
+            atualizarDados();
+        } catch (IOException ex) {
+            Logger.getLogger(EditarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(EditarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        new TelaPrincipal(textEmail.getText()).setVisible(true);
         dispose();
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
@@ -257,7 +283,10 @@ public class EditarUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cpfActionPerformed
 
-   
+    private void senhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_senhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_senhaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JFormattedTextField cpf;
@@ -270,45 +299,77 @@ public class EditarUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JFormattedTextField nascimento;
     private javax.swing.JTextField nome;
+    private javax.swing.JPasswordField senha;
     private javax.swing.JComboBox<String> setor;
     private javax.swing.JFormattedTextField telefone;
     private javax.swing.JTextField textEmail;
     // End of variables declaration//GEN-END:variables
 
     private void preencherCampos() {
-       
+
         CadastroUsuarioArquivo cad = new CadastroUsuarioArquivo();
         Usuario u;
         try {
-            
+
             u = cad.buscar(email);
             cpf.setText(u.getCpf());
             nome.setText(u.getNome());
             textEmail.setText(u.getEmail());
             telefone.setText(u.getTelefone());
-            
+            senha.setText(u.getSenha());
+
             LocalDate nas = u.getNascimento();
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
             String dnascimento = nas.format(formatter);
             nascimento.setText(dnascimento);
-            
-            
-            
-            
-            
-            
+
         } catch (IOException ex) {
             Logger.getLogger(EditarUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(EditarUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-       
-        
-        
+
     }
+
+    private void atualizarDados() throws IOException, FileNotFoundException, ClassNotFoundException {
+
+        String vcpf = cpf.getText();
+        String vemail = textEmail.getText();
+        String vsenha = new String(senha.getPassword());
+        String vnome = nome.getText();
+        String vtelefone = telefone.getText();
+        int vsetor = setor.getSelectedIndex();
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String vnascimento = nascimento.getText();
+        LocalDate datanascimento = LocalDate.parse(vnascimento, formato);
+
+        Setor s = null;
+
+        switch (vsetor) {
+            case 0:
+                s = Setor.GARCOM;
+                break;
+            case 1:
+                s = Setor.COZINHA;
+                break;
+            case 2:
+                s = Setor.CAIXA;
+                break;
+            case 3:
+                s = Setor.GERENCIA;
+                break;
+        }
+        Usuario usuario = new Usuario(vcpf, vnome, vemail, vsenha, vtelefone, datanascimento, s);
+
+        CadastroUsuarioArquivo cad = new CadastroUsuarioArquivo();
+        if (cad.atualizar(email, usuario)) {
+            System.out.println("deu certo");
+        }
+
+    }
+
 }

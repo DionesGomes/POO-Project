@@ -15,7 +15,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
      * Creates new form Main
      */
     private String email;
-    
+
     public TelaPrincipal() {
         initComponents();
     }
@@ -210,13 +210,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonGerenciaMesasActionPerformed
 
     private void jButtonGerenciaContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGerenciaContasActionPerformed
-       /**
-        * Esse botão é responsável por chamar a tela de EditarUsuário.
-        */            
-       
-       new EditarUsuario(email).setVisible(true);
-       
-        
+        /**
+         * Esse botão é responsável por chamar a tela de EditarUsuário.
+         */
+
+        new Gerenciar(email).setVisible(true);
+
+
     }//GEN-LAST:event_jButtonGerenciaContasActionPerformed
 
     private void jButtonCozinhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCozinhaActionPerformed
@@ -235,11 +235,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonSairActionPerformed
 
     private void jMenuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuSairActionPerformed
-        /*Botão do Menun*/ 
+        /*Botão do Menun*/
         dispose();
     }//GEN-LAST:event_jMenuSairActionPerformed
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCardapio;

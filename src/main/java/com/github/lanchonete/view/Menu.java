@@ -180,7 +180,6 @@ public class Menu extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jButtonCancelarActionPerformed
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCancelar;

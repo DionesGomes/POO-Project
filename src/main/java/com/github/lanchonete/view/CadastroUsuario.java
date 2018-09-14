@@ -29,7 +29,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
     public CadastroUsuario() {
         initComponents();
     }
-    
+
     GerenciaUsuario usuario = new GerenciaUsuario();
 
     /**
@@ -248,14 +248,15 @@ public class CadastroUsuario extends javax.swing.JFrame {
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
         try {
             /*Cadastrar novo Usuário*/
-            CadastrarUsuario(); /*Método para cadastrar um novo usuário.*/
+            CadastrarUsuario();
+            /*Método para cadastrar um novo usuário.*/
         } catch (IOException ex) {
             Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
         usuario.Listar();
-       
+
     }//GEN-LAST:event_jButtonCadastrarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
@@ -271,7 +272,6 @@ public class CadastroUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jFormattedTextFieldTelefoneActionPerformed
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonCadastrar;
@@ -296,18 +296,18 @@ public class CadastroUsuario extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void CadastrarUsuario() throws IOException, FileNotFoundException, ClassNotFoundException {
-        
+
         String cpf = jFormattedTextFieldCPF.getText();
         String email = jTextFieldEmail.getText();
-        String senha = new String (jPasswordFieldSenha.getPassword());
+        String senha = new String(jPasswordFieldSenha.getPassword());
         String nome = jTextFieldNome.getText();
         String telefone = jFormattedTextFieldTelefone.getText();
-        int setor =  jComboBoxSetores.getSelectedIndex();
+        int setor = jComboBoxSetores.getSelectedIndex();
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String nascimento = jFormattedTextFieldNascimento.getText();
-        LocalDate datanascimento = LocalDate.parse(nascimento,formato);
-      
-          Setor s = null;
+        LocalDate datanascimento = LocalDate.parse(nascimento, formato);
+
+        Setor s = null;
 
         switch (setor) {
             case 0:
@@ -324,14 +324,12 @@ public class CadastroUsuario extends javax.swing.JFrame {
                 break;
         }
         Usuario usuario = new Usuario(cpf, nome, email, senha, telefone, datanascimento, s);
-        
+
         CadastroUsuarioArquivo cad = new CadastroUsuarioArquivo();
-        if(cad.Adicionar(usuario)){
+        if (cad.Adicionar(usuario)) {
             System.out.println("deu certo");
         }
-        
-      
-      
-       //System.out.println(usuario.toString());
+
+        //System.out.println(usuario.toString());
     }
 }
