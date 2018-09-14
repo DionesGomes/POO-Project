@@ -5,6 +5,14 @@
  */
 package main.java.com.github.lanchonete.view;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import main.java.com.github.Lanchonete.model.Produto;
+import main.java.com.github.lanchonete.controller.CadastrarProdutoArquivo;
+
 /**
  *
  * @author Diones Gomes
@@ -14,6 +22,8 @@ public class CadastroProduto extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
+    CadastrarProdutoArquivo cad = new CadastrarProdutoArquivo();
+    
     public CadastroProduto() {
         initComponents();
     }
@@ -64,6 +74,11 @@ public class CadastroProduto extends javax.swing.JFrame {
 
         CadastrarProduto.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         CadastrarProduto.setText("Cadastrar Produto ");
+        CadastrarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CadastrarProdutoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -138,6 +153,21 @@ public class CadastroProduto extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void CadastrarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarProdutoActionPerformed
+        
+        try {
+            
+            cadastrarProduto();
+            limparTela();
+            JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+        } catch (IOException ex) {
+            Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_CadastrarProdutoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton CadastrarProduto;
@@ -153,4 +183,27 @@ public class CadastroProduto extends javax.swing.JFrame {
     private javax.swing.JTextField nome;
     private javax.swing.JFormattedTextField preco;
     // End of variables declaration//GEN-END:variables
+
+    private void cadastrarProduto() throws IOException, FileNotFoundException, ClassNotFoundException {
+        
+        int vcodigo = Integer.parseInt(codigo.getText());
+        String vnome = nome.getText();
+        String vdescricao = descricao.getText();
+        float valor = Float.parseFloat(preco.getText());
+        
+        Produto p = new Produto(vcodigo, vnome, vdescricao, valor);
+        
+        cad.Adicionar(p);
+        
+        
+    }
+
+    private void limparTela() {
+        
+        codigo.setText("");
+        nome.setText("");
+        descricao.setText("");
+        preco.setText("");
+        
+    }
 }

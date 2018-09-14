@@ -5,6 +5,15 @@
  */
 package main.java.com.github.lanchonete.view;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import main.java.com.github.Lanchonete.model.Produto;
+import main.java.com.github.lanchonete.controller.CadastrarProdutoArquivo;
+import main.java.com.github.lanchonete.model.TableProduct;
+
 /**
  *
  * @author Diones Gomes
@@ -14,8 +23,13 @@ public class ListarProdutos extends javax.swing.JFrame {
     /**
      * Creates new form ListarProdutos
      */
+    
+    public CadastrarProdutoArquivo cad = new CadastrarProdutoArquivo();
+    public TableProduct tabela = new TableProduct();
+    
     public ListarProdutos() {
         initComponents();
+        incializarTabela();
     }
 
     /**
@@ -28,14 +42,14 @@ public class ListarProdutos extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        listarUsuario = new javax.swing.JTable();
+        Tableproduct = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Listando produtos");
         setResizable(false);
 
-        listarUsuario.setModel(new javax.swing.table.DefaultTableModel(
+        Tableproduct.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -58,10 +72,15 @@ public class ListarProdutos extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(listarUsuario);
+        jScrollPane1.setViewportView(Tableproduct);
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jButton1.setText("Excluir produto");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,10 +105,55 @@ public class ListarProdutos extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        excluirProduto();
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable Tableproduct;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable listarUsuario;
     // End of variables declaration//GEN-END:variables
+
+    private void incializarTabela() {
+        try {
+            List<Produto> lista = null;
+
+            lista = cad.listar();
+
+            tabela.addList(lista);
+            Tableproduct.setModel(tabela);
+        } catch (IOException | ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Falha na conexão com arquivo",
+                    "Mensagem Erro", JOptionPane.ERROR_MESSAGE);
+
+        }
+    }
+
+    private void excluirProduto() {
+       
+        int linha = Tableproduct.getSelectedRow();
+
+        if (linha >= 0) {
+
+            try {
+
+                Object codigo = Tableproduct.getValueAt(linha, 0);
+                int delCodigo = Integer.parseInt(codigo.toString());
+
+                cad.deletar(delCodigo);
+                incializarTabela();
+
+            } catch (IOException ex) {
+                Logger.getLogger(ExluirContas.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(ExluirContas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+        
+   
 }

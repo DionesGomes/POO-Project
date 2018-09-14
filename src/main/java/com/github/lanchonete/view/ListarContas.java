@@ -10,7 +10,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import main.java.com.github.Lanchonete.model.Usuario;
 import main.java.com.github.lanchonete.controller.CadastroUsuarioArquivo;
-import main.java.com.github.lanchonete.model.Table;
+import main.java.com.github.lanchonete.model.TableUser;
 
 /**
  *
@@ -22,7 +22,7 @@ public class ListarContas extends javax.swing.JFrame {
      * Creates new form ListarContas
      */
     public CadastroUsuarioArquivo cad = new CadastroUsuarioArquivo();
-    public Table tabela = new Table();
+    public TableUser tabela = new TableUser();
 
     public ListarContas() {
         initComponents();

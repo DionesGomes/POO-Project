@@ -4,6 +4,12 @@
  * and open the template in the editor.
  */
 package main.java.com.github.lanchonete.view;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import main.java.com.github.Lanchonete.model.Produto;
+import main.java.com.github.lanchonete.controller.CadastrarProdutoArquivo;
 
 /**
  *
@@ -14,6 +20,8 @@ public class AtualizarProduto extends javax.swing.JFrame {
     /**
      * Creates new form AtualizarProduto
      */
+    
+    CadastrarProdutoArquivo cad = new CadastrarProdutoArquivo();
     public AtualizarProduto() {
         initComponents();
     }
@@ -53,6 +61,11 @@ public class AtualizarProduto extends javax.swing.JFrame {
 
         pesquisar.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         pesquisar.setText("Pesquisar");
+        pesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pesquisarActionPerformed(evt);
+            }
+        });
 
         descricao.setColumns(20);
         descricao.setRows(5);
@@ -66,6 +79,11 @@ public class AtualizarProduto extends javax.swing.JFrame {
 
         atualizar.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         atualizar.setText("Atualizar");
+        atualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                atualizarActionPerformed(evt);
+            }
+        });
 
         cancelar.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         cancelar.setText("Cancelar");
@@ -163,6 +181,37 @@ public class AtualizarProduto extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_cancelarActionPerformed
 
+    private void atualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarActionPerformed
+        
+        try {
+            
+            atualizarProduto();
+            limparTela();
+            JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso!");
+            
+        } catch (IOException ex) {
+            Logger.getLogger(AtualizarProduto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AtualizarProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_atualizarActionPerformed
+
+    private void pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarActionPerformed
+        
+        try {
+            
+            buscarProduto();
+            
+            
+        } catch (IOException ex) {
+            Logger.getLogger(AtualizarProduto.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AtualizarProduto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_pesquisarActionPerformed
+
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -180,4 +229,38 @@ public class AtualizarProduto extends javax.swing.JFrame {
     private javax.swing.JButton pesquisar;
     private javax.swing.JFormattedTextField preco;
     // End of variables declaration//GEN-END:variables
+
+    private void atualizarProduto() throws IOException, ClassNotFoundException {
+        
+        
+        String vnome = nome.getText();
+        String vdescricao = descricao.getText();
+        float vpreco = Float.parseFloat(preco.getText());
+        int vcodigo = Integer.parseInt(codigo.getText());
+        
+        Produto p = new Produto(vcodigo, vnome, vdescricao, vpreco);
+        cad.atualizar(p, vcodigo);
+        
+    }
+
+    private void buscarProduto() throws IOException, ClassNotFoundException {
+        
+        int codigoBusca = Integer.parseInt(codigo.getText());
+        
+        Produto p = cad.buscar(codigoBusca);
+        
+        nome.setText(p.getNome());
+        descricao.setText(p.getDescricao());
+        preco.setText(String.valueOf(p.getPreco()));
+        
+    }
+    
+    private void limparTela() {
+        
+        codigo.setText("");
+        nome.setText("");
+        descricao.setText("");
+        preco.setText("");
+        
+    }
 }
