@@ -320,7 +320,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
 
         switch (setor) {
             case 0:
-                s = Setor.GARCOM;
+                s = Setor.GARSOM;
                 break;
             case 1:
                 s = Setor.COZINHA;

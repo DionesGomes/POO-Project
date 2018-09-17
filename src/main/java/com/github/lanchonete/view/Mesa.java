@@ -6,7 +6,7 @@
 package main.java.com.github.lanchonete.view;
 
 import javax.swing.JOptionPane;
-import jdk.nashorn.internal.scripts.JO;
+import main.java.com.github.Lanchonete.controller.GerenciaComanda;
 
 /**
  *
@@ -20,6 +20,8 @@ public class Mesa extends javax.swing.JFrame {
     public Mesa() {
         initComponents();
     }
+    
+    GerenciaComanda gerencia = new GerenciaComanda();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -153,7 +155,7 @@ public class Mesa extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButtonNovaComandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovaComandaActionPerformed
-        /*Nova comanda*/
+
         JOptionPane.showMessageDialog(null, "Nova comanda criada para a mesa" + " 3");
     }//GEN-LAST:event_jButtonNovaComandaActionPerformed
 

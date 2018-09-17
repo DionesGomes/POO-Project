@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package main.java.com.github.lanchonete.view;
+
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,8 +21,8 @@ public class AtualizarProduto extends javax.swing.JFrame {
     /**
      * Creates new form AtualizarProduto
      */
-    
     CadastrarProdutoArquivo cad = new CadastrarProdutoArquivo();
+
     public AtualizarProduto() {
         initComponents();
     }
@@ -182,37 +183,35 @@ public class AtualizarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_cancelarActionPerformed
 
     private void atualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_atualizarActionPerformed
-        
+
         try {
-            
+
             atualizarProduto();
             limparTela();
             JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso!");
-            
+
         } catch (IOException ex) {
             Logger.getLogger(AtualizarProduto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AtualizarProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_atualizarActionPerformed
 
     private void pesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pesquisarActionPerformed
-        
+
         try {
-            
+
             buscarProduto();
-            
-            
+
         } catch (IOException ex) {
             Logger.getLogger(AtualizarProduto.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AtualizarProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_pesquisarActionPerformed
 
-   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton atualizar;
@@ -231,36 +230,38 @@ public class AtualizarProduto extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void atualizarProduto() throws IOException, ClassNotFoundException {
-        
-        
+
         String vnome = nome.getText();
         String vdescricao = descricao.getText();
         float vpreco = Float.parseFloat(preco.getText());
         int vcodigo = Integer.parseInt(codigo.getText());
-        
+
         Produto p = new Produto(vcodigo, vnome, vdescricao, vpreco);
         cad.atualizar(p, vcodigo);
-        
+
     }
 
     private void buscarProduto() throws IOException, ClassNotFoundException {
-        
+
         int codigoBusca = Integer.parseInt(codigo.getText());
-        
-        Produto p = cad.buscar(codigoBusca);
-        
-        nome.setText(p.getNome());
-        descricao.setText(p.getDescricao());
-        preco.setText(String.valueOf(p.getPreco()));
-        
+
+        if (cad.buscar(codigoBusca) == null) {
+            JOptionPane.showMessageDialog(null, "Não há produto relacionado a esse código!");
+        } else {
+            Produto p = cad.buscar(codigoBusca);
+
+            nome.setText(p.getNome());
+            descricao.setText(p.getDescricao());
+            preco.setText(String.valueOf(p.getPreco()));
+        }
     }
-    
+
     private void limparTela() {
-        
+
         codigo.setText("");
         nome.setText("");
         descricao.setText("");
         preco.setText("");
-        
+
     }
 }

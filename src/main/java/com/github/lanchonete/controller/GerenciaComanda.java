@@ -11,7 +11,7 @@ import main.java.com.github.Lanchonete.model.Comanda;
  *
  * @author Diones Gomes
  */
-public class Gerencia {
+public class GerenciaComanda {
 
     /**
      * Contém a lista de mesas relacionadas as comandas.
@@ -19,7 +19,7 @@ public class Gerencia {
     private static List<Comanda> gerenciaComanda = new ArrayList<>();
 
     /**
-     * Método para adicionar uma mesa que já foi encerrada.
+     * Método para adicionar uma nova comanda para uma determinada mesa.
      *  
      */
     static boolean adicionarComanda(Comanda c) {

@@ -349,7 +349,7 @@ public class EditarUsuario extends javax.swing.JFrame {
 
         switch (vsetor) {
             case 0:
-                s = Setor.GARCOM;
+                s = Setor.GARSOM;
                 break;
             case 1:
                 s = Setor.COZINHA;

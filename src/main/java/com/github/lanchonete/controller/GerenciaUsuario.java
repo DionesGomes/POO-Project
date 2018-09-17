@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.HashMap;
 import java.util.Map;
+import javax.swing.JOptionPane;
 
 import main.java.com.github.Lanchonete.model.Setor;
 import main.java.com.github.Lanchonete.model.Usuario;
@@ -105,7 +106,7 @@ public class GerenciaUsuario {
                 return true;
             }
         } catch (NullPointerException ex) {
-            System.out.println("Login ou Senha inválido!");
+            JOptionPane.showMessageDialog(null, "Usuario ou Senha inválido!");
         }
 
         return false;

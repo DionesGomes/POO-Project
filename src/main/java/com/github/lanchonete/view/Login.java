@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import main.java.com.github.Lanchonete.controller.GerenciaUsuario;
 import main.java.com.github.lanchonete.controller.CadastroUsuarioArquivo;
 
 /**
@@ -155,7 +154,7 @@ public class Login extends javax.swing.JFrame {
                 princiapal.setVisible(true);
                 this.dispose();
             } else {
-                JOptionPane.showMessageDialog(null, "Login ou Senha invalido!");
+                 JOptionPane.showMessageDialog(null, "Login ou Senha invalido!");
                 /*Setando null, para limpar o campo de password*/
                 jTextFieldEmail.setText(" ");
                 jPasswordFieldSenha.setText(null);
