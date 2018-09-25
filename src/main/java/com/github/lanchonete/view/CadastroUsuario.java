@@ -254,11 +254,10 @@ public class CadastroUsuario extends javax.swing.JFrame {
             /*Cadastrar novo Usuário*/
             verificarCampos();
             CadastrarUsuario();
+            JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
 
             
-        } catch (IOException ex) {
-            Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(CadastroUsuario.class.getName()).log(Level.SEVERE, null, ex);
         } catch (FormularioException ex) {
            JOptionPane.showMessageDialog(null, ex.getMessage(), "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);        }
@@ -320,7 +319,7 @@ public class CadastroUsuario extends javax.swing.JFrame {
 
         switch (setor) {
             case 0:
-                s = Setor.GARSOM;
+                s = Setor.GARCON;
                 break;
             case 1:
                 s = Setor.COZINHA;

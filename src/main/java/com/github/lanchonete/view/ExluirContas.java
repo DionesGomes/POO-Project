@@ -107,6 +107,8 @@ public class ExluirContas extends javax.swing.JFrame {
     private void ExcluirContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirContaActionPerformed
         deletarUsuario();
         incializarTabela();
+        JOptionPane.showMessageDialog(null, "Conta deletada com sucesso!");
+        dispose();
 
     }//GEN-LAST:event_ExcluirContaActionPerformed
 
@@ -147,9 +149,7 @@ public class ExluirContas extends javax.swing.JFrame {
                 cad.deletar(delEmail);
                 incializarTabela();
 
-            } catch (IOException ex) {
-                Logger.getLogger(ExluirContas.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
+            } catch (IOException | ClassNotFoundException ex) {
                 Logger.getLogger(ExluirContas.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

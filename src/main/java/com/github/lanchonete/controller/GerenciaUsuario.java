@@ -1,12 +1,9 @@
 package main.java.com.github.Lanchonete.controller;
 
-import java.time.LocalDate;
-import java.time.Month;
+
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
-
-import main.java.com.github.Lanchonete.model.Setor;
 import main.java.com.github.Lanchonete.model.Usuario;
 
 /**
@@ -19,16 +16,14 @@ import main.java.com.github.Lanchonete.model.Usuario;
  */
 public class GerenciaUsuario {
 
-    private Map<String, Usuario> usuarios;
+    private  Map<String, Usuario> usuarios;
 
     /**
      * Inicializando o construtor, sem passar parâmetros.
      */
     public GerenciaUsuario() {
         usuarios = new HashMap<>();
-
-        /*Adicionando o gerente para teste.*/
-        addLogin(new Usuario("111.111.111-11", "Administrador", "admin@gmail.com", "admin", "9999-9999", LocalDate.of(1996, Month.AUGUST, 12), Setor.GERENCIA));
+       
     }
 
     /**
@@ -103,6 +98,7 @@ public class GerenciaUsuario {
         try {
             Usuario usuario = encontrarUsuario(email);
             if (usuario.getSenha().equals(senha)) {
+                
                 return true;
             }
         } catch (NullPointerException ex) {

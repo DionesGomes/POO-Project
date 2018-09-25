@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import main.java.com.github.lanchonete.controller.CadastroUsuarioArquivo;
 
+
 /**
  *
  * @author Diones Gomes
@@ -152,21 +153,19 @@ public class Login extends javax.swing.JFrame {
             if (cad.Autenticacao(jTextFieldEmail.getText(), new String(jPasswordFieldSenha.getPassword()))) {
                 TelaPrincipal princiapal = new TelaPrincipal(jTextFieldEmail.getText());
                 princiapal.setVisible(true);
+                //JOptionPane.showMessageDialog(null, "seja bem vindo!");
                 this.dispose();
             } else {
-                 JOptionPane.showMessageDialog(null, "Login ou Senha invalido!");
+                JOptionPane.showMessageDialog(null, "Login ou Senha invalido!");
                 /*Setando null, para limpar o campo de password*/
                 jTextFieldEmail.setText(" ");
                 jPasswordFieldSenha.setText(null);
-                
 
             }
-        } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         } catch (FormularioException ex) {
-            JOptionPane.showMessageDialog(null, ex.getMessage(), "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);   
+            JOptionPane.showMessageDialog(null, ex.getMessage(), "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);
         }
 
 
@@ -177,9 +176,7 @@ public class Login extends javax.swing.JFrame {
             // TODO add your handling code here:
 
             System.out.println(cad.listar().toString());
-        } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -237,11 +234,11 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldEmail;
     // End of variables declaration//GEN-END:variables
 
-    private void verificaCampo()throws FormularioException{
+    private void verificaCampo() throws FormularioException {
         if (jTextFieldEmail.getText().equals("")) {
             throw new FormularioException("O compo E-EMAIL não pode estar vazio!");
         }
-        
+
         if (String.copyValueOf(jPasswordFieldSenha.getPassword()).equals("")) {
             throw new FormularioException("O campo SENHA não pode estar vazio");
         }

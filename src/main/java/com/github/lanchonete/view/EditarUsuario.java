@@ -267,9 +267,7 @@ public class EditarUsuario extends javax.swing.JFrame {
     private void jButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCadastrarActionPerformed
         try {
             atualizarDados();
-        } catch (IOException ex) {
-            Logger.getLogger(EditarUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(EditarUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -325,9 +323,7 @@ public class EditarUsuario extends javax.swing.JFrame {
             String dnascimento = nas.format(formatter);
             nascimento.setText(dnascimento);
 
-        } catch (IOException ex) {
-            Logger.getLogger(EditarUsuario.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(EditarUsuario.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -349,7 +345,7 @@ public class EditarUsuario extends javax.swing.JFrame {
 
         switch (vsetor) {
             case 0:
-                s = Setor.GARSOM;
+                s = Setor.GARCON;
                 break;
             case 1:
                 s = Setor.COZINHA;

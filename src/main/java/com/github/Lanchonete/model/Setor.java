@@ -6,7 +6,7 @@ package main.java.com.github.Lanchonete.model;
  * Lanchonete.
  */
 public enum Setor {
-    GARSOM, CAIXA, COZINHA, GERENCIA;
+    GARCON, CAIXA, COZINHA, GERENCIA;
     /*OBS: Caso o parametro passado não bata com as opçõe acima, uma exceção e gerada*/
 
 }

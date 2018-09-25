@@ -2,7 +2,7 @@ package main.java.com.github.Lanchonete.model;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import main.java.com.github.Lanchonete.controller.GerenciaMesa;
 
 /**
  * Esta classe modela os dados referentes a entidade Cozinha.
@@ -20,6 +20,7 @@ public class Cozinha {
     public Cozinha() {
         pedidos = new ArrayList<>();
     }
+
     /**
      * Método para adicionar um pedido na lista de Pedidos.
      *
@@ -29,6 +30,7 @@ public class Cozinha {
     public boolean adicionarPedido(Pedido p) {
         return pedidos.add(p);
     }
+
     /**
      * Métedo para remover um pedido da lista de Pedidos com base no número do
      * mesmo.
@@ -40,6 +42,7 @@ public class Cozinha {
         /*Adicionar exceção posteriomente.*/
         return pedidos.remove(pedidos.get(buscar(numeroPedido)));
     }
+
     /**
      * Método para buscar um Pedido.
      *
@@ -57,6 +60,21 @@ public class Cozinha {
         }
         return -1;
     }
+    /**
+     * 
+     * @param numeroPedido corresponde ao número do pedido feito para uma mesa.
+     * @param gm referente a uma mesa cadastrada.
+     * @return muda o estatus do pedido para atendido e remove o pedido da cozinha.
+     */
+    public boolean atenderPedido(int numeroPedido, GerenciaMesa gm) {
+        if (buscar(numeroPedido) == -1) {
+            return false;
+        }
+        int mesa = pedidos.get(buscar(numeroPedido)).getMesa();//descobre a mesa de um determinado pedido
+        //gm.getComanda(mesa).getPedido(numeroPedido).mudarStatus();// muda o status de não atendido para atendido
+        return pedidos.remove(pedidos.get(buscar(numeroPedido)));//remove da cozinha
+    }
+
     /**
      *
      * @return Uma String contendo todas as informações referentes a um pedido.
