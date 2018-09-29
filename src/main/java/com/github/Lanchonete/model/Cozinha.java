@@ -11,15 +11,11 @@ import main.java.com.github.Lanchonete.controller.GerenciaMesa;
  * @author Diones Gomes
  */
 public class Cozinha {
-
-    private List<Pedido> pedidos;
-
     /**
-     * Inicializa o ArrayList sem passar parâmetros.
+     * Inicializa o ArrayList sem nenhum dado.
      */
-    public Cozinha() {
-        pedidos = new ArrayList<>();
-    }
+
+    private static List<Pedido> pedidos = new ArrayList<>();    
 
     /**
      * Método para adicionar um pedido na lista de Pedidos.
@@ -27,7 +23,7 @@ public class Cozinha {
      * @param p Referente ao pedido adicionado a lista de Pedidos.
      * @return true ou false.
      */
-    public boolean adicionarPedido(Pedido p) {
+    public static boolean adicionarPedido(Pedido p) {
         return pedidos.add(p);
     }
 
@@ -38,7 +34,7 @@ public class Cozinha {
      * @param numeroPedido Refere-se ao número do pedido.
      * @return true ou false.
      */
-    public boolean removePedido(int numeroPedido) {
+    public static  boolean removePedido(int numeroPedido) {
         /*Adicionar exceção posteriomente.*/
         return pedidos.remove(pedidos.get(buscar(numeroPedido)));
     }
@@ -50,7 +46,7 @@ public class Cozinha {
      * @return o número do pedido se presente, se não returna um inteiro
      * negativo.
      */
-    public int buscar(int numeroPedido) {
+    public static int buscar(int numeroPedido) {
         if (!pedidos.isEmpty()) {
             for (int i = 0; i < pedidos.size(); i++) {
                 if (pedidos.get(i).getNumeroPedido() == numeroPedido) {
@@ -66,7 +62,7 @@ public class Cozinha {
      * @param gm referente a uma mesa cadastrada.
      * @return muda o estatus do pedido para atendido e remove o pedido da cozinha.
      */
-    public boolean atenderPedido(int numeroPedido, GerenciaMesa gm) {
+    public static boolean atenderPedido(int numeroPedido, GerenciaMesa gm) {
         if (buscar(numeroPedido) == -1) {
             return false;
         }
@@ -79,11 +75,18 @@ public class Cozinha {
      *
      * @return Uma String contendo todas as informações referentes a um pedido.
      */
-    public String visualizar() {
+    public static String visualizar() {
         String s = "";
         for (Pedido p : pedidos) {
             s += "Mesa:" + p.getMesa() + "Número:" + p.getNumeroPedido() + "\n" + p.toString();
         }
         return s;
+    }
+    /**
+     * Este método e responsável por listar todos os pedidos armazenados.
+     * @return um array contendo todos os pedidos. 
+     */
+    public static List<Pedido> listar(){
+        return pedidos;
     }
 }

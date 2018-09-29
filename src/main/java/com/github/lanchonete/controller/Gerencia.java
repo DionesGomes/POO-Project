@@ -11,19 +11,19 @@ import main.java.com.github.Lanchonete.model.Comanda;
  *
  * @author Diones Gomes
  */
-public class GerenciaComanda {
+public class Gerencia {
 
     /**
      * Contém a lista de mesas relacionadas as comandas.
      */
-    private static List<Comanda> gerenciaComanda = new ArrayList<>();
+    private static List<Comanda> mesas = new ArrayList<>();
 
     /**
      * Método para adicionar uma nova comanda para uma determinada mesa.
      *  
      */
     static boolean adicionarComanda(Comanda c) {
-        return gerenciaComanda.add(c);
+        return mesas.add(c);
     }
 
     /**
@@ -34,9 +34,9 @@ public class GerenciaComanda {
      * @param fim Refere-se a data final.
      * @return As mesas cujas datas informadas no período de tempo especificado.
      */
-    public static String listarComandas(LocalDate inicio, LocalDate fim) {
+    public static String listarComandasNumPeriodoDeTempo(LocalDate inicio, LocalDate fim) {
         String s = "";
-        for (Comanda comanda : gerenciaComanda) {
+        for (Comanda comanda : mesas) {
             if (comanda.getData().isAfter(inicio.plusDays(-1)) && comanda.getData().isBefore(fim.plusDays(1))) {// se a data de uma comanda c qualquer for depois de "inicio-1" e antes de "fim+1" ela é concatenada como String
                 s += comanda.toString();
             }
@@ -53,7 +53,7 @@ public class GerenciaComanda {
      */
     public static float CalculaLucroTotal(LocalDate inicio, LocalDate fim) {
         float lucro = 0f;
-        for (Comanda comanda : gerenciaComanda) {
+        for (Comanda comanda : mesas) {
             if (comanda.getData().isAfter(inicio.plusDays(-1)) && comanda.getData().isBefore(fim.plusDays(1))) {
                 lucro += comanda.valorTotal();
             }

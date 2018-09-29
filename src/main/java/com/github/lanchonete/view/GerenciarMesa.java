@@ -6,22 +6,22 @@
 package main.java.com.github.lanchonete.view;
 
 import javax.swing.JOptionPane;
-import main.java.com.github.Lanchonete.controller.GerenciaComanda;
+import main.java.com.github.Lanchonete.controller.Gerencia;
 
 /**
  *
  * @author Diones Gomes
  */
-public class Mesa extends javax.swing.JFrame {
+public class GerenciarMesa extends javax.swing.JFrame {
 
     /**
      * Creates new form Mesa
      */
-    public Mesa() {
+    public GerenciarMesa() {
         initComponents();
     }
     
-    GerenciaComanda gerencia = new GerenciaComanda();
+    Gerencia gerencia = new Gerencia();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -161,6 +161,7 @@ public class Mesa extends javax.swing.JFrame {
 
     private void jButtonVerPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerPedidosActionPerformed
         // TODO add your handling code here:
+        new ListarPedidos().setVisible(true);
     }//GEN-LAST:event_jButtonVerPedidosActionPerformed
 
     private void jButtonFazerPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFazerPedidosActionPerformed

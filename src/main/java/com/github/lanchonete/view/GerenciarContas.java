@@ -9,19 +9,19 @@ package main.java.com.github.lanchonete.view;
  *
  * @author Diones Gomes
  */
-public class Gerenciar extends javax.swing.JFrame {
+public class GerenciarContas extends javax.swing.JFrame {
 
     /**
-     * Creates new form Gerenciar
+     * Creates new form GerenciarContas
      */
     private String email;
 
-    Gerenciar(String text) {
+    GerenciarContas(String text) {
         this.email = text;
         initComponents();
     }
 
-    public Gerenciar() {
+    public GerenciarContas() {
         initComponents();
     }
 
@@ -44,7 +44,7 @@ public class Gerenciar extends javax.swing.JFrame {
         setResizable(false);
 
         jButton1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jButton1.setText("Atualzar Contas de  Usuario");
+        jButton1.setText("Atualizar Contas de  Usuario");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -98,7 +98,7 @@ public class Gerenciar extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(111, 111, 111)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

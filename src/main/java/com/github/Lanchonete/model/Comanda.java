@@ -102,7 +102,7 @@ public class Comanda {
      * @param numeroPedido Fefere-se o número do pedido que será removido.
      * @return O pedido se encontrado, retorna NULL se não encontrado.
      */
-    public Pedido getPedido(int numeroPedido) {
+    public Pedido getPedido(int numeroPedido) { //Retorna um pedido específico.
         return comanda.get(buscarPedido(numeroPedido));
     }
     /**
@@ -119,6 +119,7 @@ public class Comanda {
      *
      * @return String contendo todas as informações dos pedidos realizado.
      */
+    @Override
     public String toString() {
         String s = data.toString() + " |Mesa:" + mesa + " |N°:" + numeroComanda + "\n==================================\n";
         for (Pedido p : comanda) {

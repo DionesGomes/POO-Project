@@ -201,12 +201,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jButtonCardapioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCardapioActionPerformed
         // TODO add your handling code here:
-        new Menu().setVisible(true);
+        new GerenciarMenu().setVisible(true);
     }//GEN-LAST:event_jButtonCardapioActionPerformed
 
     private void jButtonGerenciaMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGerenciaMesasActionPerformed
         // TODO add your handling code here:
-        new Mesa().setVisible(true);
+        new GerenciarMesa().setVisible(true);
     }//GEN-LAST:event_jButtonGerenciaMesasActionPerformed
 
     private void jButtonGerenciaContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGerenciaContasActionPerformed
@@ -214,19 +214,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
          * Esse botão é responsável por chamar a tela de EditarUsuário.
          */
 
-        new Gerenciar(email).setVisible(true);
+        new GerenciarContas(email).setVisible(true);
 
 
     }//GEN-LAST:event_jButtonGerenciaContasActionPerformed
 
     private void jButtonCozinhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCozinhaActionPerformed
         // TODO add your handling code here:
-        new Pedidos().setVisible(true);
+        new AtenderPedidos().setVisible(true);
     }//GEN-LAST:event_jButtonCozinhaActionPerformed
 
     private void jButtonGerenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGerenciaActionPerformed
         // TODO add your handling code here:
-        new Gerencia().setVisible(true);
+        new GerenciarComandasFechadas().setVisible(true);
     }//GEN-LAST:event_jButtonGerenciaActionPerformed
 
     private void jButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSairActionPerformed

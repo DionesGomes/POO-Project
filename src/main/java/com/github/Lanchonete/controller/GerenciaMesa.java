@@ -5,6 +5,7 @@ import java.util.List;
 
 import main.java.com.github.Lanchonete.model.Comanda;
 import main.java.com.github.Lanchonete.model.Pedido;
+import main.java.com.github.Lanchonete.model.Cozinha;
 
 /**
  * Esta classe faz o gerenciamento das mesas.
@@ -16,41 +17,139 @@ import main.java.com.github.Lanchonete.model.Pedido;
  */
 public class GerenciaMesa {
 
-    private List<Comanda> mesas;
+    /**
+	 * Inicia a lista de mesas da classe GerenciaMesa.
+	 **/
+	private static List<Comanda> mesas = new ArrayList<>();
 
-    /**
-     * Iniciando o ArrayList, sem passar parâmentros.
-     */
-    public GerenciaMesa() {
-        mesas = new ArrayList<>();
-    }
-    /**
-     * Método para adicionar uma nova comanda para uma mesa.
-     *
-     * @param mesa Refere-se ao número da mesa que abriu uma comanda.
-     * @return true ou false.
-     */
-    public boolean novaComanda(int mesa) {
-        if (buscar(mesa) != -1) {// verifica a existência da mesa, pois não pode haver mais de uma comanda para uma mesma mesa. 
-            return false;
-        }
-        return mesas.add(new Comanda(mesa));
-    }
-    /**
-     * Método para buscar uma mesa na lista de mesas.s
-     *
-     * @param mesa Refere-se ao número da mesa que será recuperado.
-     * @return 1 para mesa encontrada ou -1 caso a mesa não exista.
-     */
-    int buscar(int mesa) {
-        if (!(mesas.isEmpty())) {// Verifica a existência de uma comanda para uma mesa.
-            for (int i = 0; i < mesas.size(); i++) {
-                if (mesas.get(i).getMesa() == mesa) {
-                    return i;
-                }
-            }
-        }
-        return -1;
-    }    
-
+	/**
+	 * Cria uma nova mesa na lista de mesas da classe.
+	 * @param mesa recebe o valor <b>único</b> da nova mesa que será adicionada
+	 * @return true se a mesa for inserida na lista ou false se a mesa não for inserida.
+	 **/
+	public static boolean novaComanda(int mesa) {
+		if(buscar(mesa)!=-1) {// verifica se a mesa existe ou não 
+			return false; // não pode ser aberta duas ou mais comandas na mesma mesa
+		}
+		return mesas.add(new Comanda(mesa));		
+	}
+	
+	/**
+	 * Encerra uma comanda removendo-a da lista e adiciona a mesma na Gerencia.
+	 * @param mesa recebe o valor <b>único</b> da mesa que será removida.
+	 * @return true se a mesa for encerrada ou false se a mesa não for encerrada.
+	 **/
+	public static boolean encerrarComanda(int mesa) {
+		if(buscar(mesa)==-1) {// verifica se a mesa existe ou não
+			return false;// não se pode encerrar uma comanda que não existe
+		}
+		for(Pedido p : getComanda(mesa).getListarPedidos()) {
+			if(p.isStatus()== false) {// não se pode encerrar uma comanda que não tenha sido atendido todos pedidos
+				return false;
+			}
+		}
+		return Gerencia.adicionarComanda(mesas.remove(buscar(mesa)));//  adicionando uma nova comanda para poder gerenciar.
+	}
+	
+	/**
+	 * Faz um novo pedido para uma comanda já criada.
+	 * @param mesa recebe o valor <b>único</b> da mesa que receberá o novo pedido
+	 * @param p recebe o pedido que será atribuido a comanda
+	 * @return true se o pedido for adicionado a comanda e a cozinha ou false se o pedido nao for adicionado.
+	 **/
+	public static boolean fazerPedido(int mesa, Pedido p) {
+		if(buscar(mesa)!=-1 && p.getProduto()!=null) {
+			Cozinha.adicionarPedido(p); // adiciona à cozinha                            
+			return mesas.get(buscar(mesa)).adicionaPedido(p);
+		}
+		Pedido.setContPedidos(Pedido.getContPedidos()-1);// decrementa o contador de pedido pois o pedido p não pode ser feito então ele não sera contado com os demais
+		return false;
+	}
+	
+	/**
+	 * Mostra todos os pedidos de uma mesa.
+	 * @param mesa valor <b>único</b> da mesa que contem os pedidos.
+	 * @return String dos pedidos da mesa.
+	 **/
+	public static String verPedidos(int mesa) {// retorna uma string com todos os pedidos de uma determinada comanda
+		if(buscar(mesa)==-1) {
+			return "";
+		}
+		return mesas.get(buscar(mesa)).toString();
+	}
+	
+	/**
+	 * Modifica um pedido existente em uma mesa e na cozinha, caso a mesa esteja aberta.
+	 * @param mesa recebe o valor <b>único</b> da mesa que contém o pedido que será alterado.
+	 * @param numeroPedido recebe o valor <b>único</b> do pedido que será alterado.
+         * @param p Corresponde ao pedido.
+	 * @return true caso o pedido seja alterado ou false caso o pedido não tenha sido alterado.
+	 **/
+	public static boolean modificarPedido(int mesa, Pedido p, int numeroPedido) {
+		if(ehNumeroPedidoValido(mesa, numeroPedido)) {// verifica se o numero do pedido existe (tambem verifica se a mesa existe) 
+			if(!(mesas.get(buscar(mesa)).getPedido(numeroPedido).isStatus())) {//verifica se ele já não foi atendido
+				Pedido.setContPedidos(Pedido.getContPedidos()-1);//pelo fato de ter sido necessário instanciar um novo pedido, so para modificar um já existente, é decrementado o contador de pedidos
+				p.setNumeroPedido(numeroPedido); // o pedido novo, que servirá para modificar o antigo, tem seu numero definido para o do pedido antigo 
+				excluirPedido(mesa, numeroPedido);//o pedido antigo é excluido da comanda e tambem da cozinha
+				return fazerPedido(mesa, p);//o novo pedido é adicionado a comanda e a cozinha, substituindo o antigo 
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Exclui um pedido existente na mesa e na cozinha.
+	 * @param mesa recebe o valor <b>único</b> da mesa que contém o pedido a ser removido.
+	 * @param numeroPedido recebe o valor <b>único</b> do pedido que será removido.
+	 * @return true caso o pedido seja removido ou false caso não seja removido.
+	 **/
+	public static boolean excluirPedido(int mesa, int numeroPedido) {
+		if(ehNumeroPedidoValido(mesa, numeroPedido)) {// verifica se o numero do pedido existe (tambem verifica se a mesa existe) 
+			if(!(mesas.get(buscar(mesa)).getPedido(numeroPedido).isStatus())) {//verifica se ele já não foi atendido
+				Cozinha.removePedido(numeroPedido); //remover da lista da cozinha
+				return mesas.get(buscar(mesa)).removePedido(numeroPedido);
+			}
+		}
+		return false;
+	}
+	
+	/**
+	 * Busca a mesa na lista de mesas e retorna seu indice.
+	 * @param mesa recebe o valor <b>único</b> da mesa que será buscada.
+	 * @return número >= 0 caso a mesa seja encontrasa, sendo o número o indice da mesa, ou -1 caso a mesa não seja encontrada.
+	 **/
+	static int buscar(int mesa) {
+		if(!(mesas.isEmpty())) {// não se pode buscar comandas se elas não existem
+			for(int i = 0;i < mesas.size();i++) {
+				if(mesas.get(i).getMesa() == mesa) {
+					return i;
+				}
+			}
+		}
+		return -1;
+	}
+	
+	/**
+	 * Busca a mesa na lista de mesas e a retorna.
+	 * @param mesa recebe o valor <b>único</b> da mesa que será buscada.
+	 * @return mesa caso seja encontrada ou null caso não exista;
+	 **/
+	public static Comanda getComanda(int mesa){//retorna a (tudo da)comanda de uma mesa especifica (relaciona esta classe com Cozinha) /////não confundir com getListaPedido() que retorna a lista de todos os pedidos da comanda mas não retorna data, numero e mesa 
+		if(buscar(mesa)!=-1)
+			return mesas.get(buscar(mesa));
+		return null;
+	}
+	
+	/**
+	 * Verfica se a mesa existe juntamente com um pedido.
+	 * @param mesa recebe o valor <b>único</b> da mesa que será buscada.
+	 * @param numeroPedido recebe o valor <b>único</b> do pedido que será buscado.
+	 * @return true caso a mesa exista e o pedido esteja na mesa ou false caso não seja encontrado o pedido na mesa ou a própria mesa.
+	 **/
+	private static boolean ehNumeroPedidoValido(int mesa, int numeroPedido) { // verifica se o numero do pedido e a mesa existem
+		if(buscar(mesa)!=-1) {
+			return mesas.get(buscar(mesa)).buscarPedido(numeroPedido)!=-1; // retorna o valor lógico da comparação
+		}
+		return false;
+	}
 }

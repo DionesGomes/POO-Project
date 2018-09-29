@@ -9,12 +9,12 @@ package main.java.com.github.lanchonete.view;
  *
  * @author Diones Gomes
  */
-public class Gerencia extends javax.swing.JFrame {
+public class GerenciarComandasFechadas extends javax.swing.JFrame {
 
     /**
      * Creates new form Gerencia
      */
-    public Gerencia() {
+    public GerenciarComandasFechadas() {
         initComponents();
     }
 
