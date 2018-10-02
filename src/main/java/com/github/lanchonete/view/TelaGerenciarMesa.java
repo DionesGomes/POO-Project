@@ -5,23 +5,35 @@
  */
 package main.java.com.github.lanchonete.view;
 
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import main.java.com.github.Lanchonete.controller.Gerencia;
+import main.java.com.github.Lanchonete.controller.GerenciaMesa;
+
+import main.java.com.github.lanchonete.controller.CadastrarPedidosArquivo;
+import main.java.com.github.lanchonete.controller.CadastrarProdutoArquivo;
 
 /**
  *
  * @author Diones Gomes
  */
-public class GerenciarMesa extends javax.swing.JFrame {
+public class TelaGerenciarMesa extends javax.swing.JFrame {
 
     /**
      * Creates new form Mesa
      */
-    public GerenciarMesa() {
+    public TelaGerenciarMesa() {
         initComponents();
     }
-    
+
     Gerencia gerencia = new Gerencia();
+    GerenciaMesa gm = new GerenciaMesa();
+    CadastrarProdutoArquivo produtos = new CadastrarProdutoArquivo();
+    CadastrarPedidosArquivo pedido = new CadastrarPedidosArquivo();
+
+    private static Integer mesa;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,11 +47,11 @@ public class GerenciarMesa extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButtonNovaComanda = new javax.swing.JButton();
+        NovaComanda = new javax.swing.JButton();
         jButtonVerPedidos = new javax.swing.JButton();
         jButtonFazerPedidos = new javax.swing.JButton();
         jButtonEncerrarComanda = new javax.swing.JButton();
+        NumeroDaMesa = new javax.swing.JSpinner();
 
         jLabel2.setText("jLabel2");
 
@@ -50,17 +62,11 @@ public class GerenciarMesa extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel1.setText("Mesa");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        NovaComanda.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        NovaComanda.setText("Nova Comanda");
+        NovaComanda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        jButtonNovaComanda.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jButtonNovaComanda.setText("Nova Comanda");
-        jButtonNovaComanda.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonNovaComandaActionPerformed(evt);
+                NovaComandaActionPerformed(evt);
             }
         });
 
@@ -88,6 +94,8 @@ public class GerenciarMesa extends javax.swing.JFrame {
             }
         });
 
+        NumeroDaMesa.setModel(new javax.swing.SpinnerNumberModel(1, null, null, 1));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -98,12 +106,12 @@ public class GerenciarMesa extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButtonNovaComanda, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(NovaComanda, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonVerPedidos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonFazerPedidos))
-                    .addComponent(jTextField1))
+                    .addComponent(NumeroDaMesa))
                 .addContainerGap(74, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -113,15 +121,13 @@ public class GerenciarMesa extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(45, 45, 45)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NumeroDaMesa, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonNovaComanda, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(NovaComanda, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
                     .addComponent(jButtonVerPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonFazerPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -143,46 +149,85 @@ public class GerenciarMesa extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(116, 116, 116)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(144, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void NovaComandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NovaComandaActionPerformed
 
-    private void jButtonNovaComandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNovaComandaActionPerformed
-
-        JOptionPane.showMessageDialog(null, "Nova comanda criada para a mesa" + " 3");
-    }//GEN-LAST:event_jButtonNovaComandaActionPerformed
+        if (GerenciaMesa.novaComanda((Integer) NumeroDaMesa.getValue())) {
+            JOptionPane.showMessageDialog(null, "Comanda criada com sucesso!");
+        } else {
+            JOptionPane.showMessageDialog(null, "A comanda não pôde ser criada!");
+        }
+    }//GEN-LAST:event_NovaComandaActionPerformed
 
     private void jButtonVerPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerPedidosActionPerformed
-        // TODO add your handling code here:
-        new ListarPedidos().setVisible(true);
+        try {
+            if (pedido.listar().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Não há pedidos!");
+            } else {
+                new TelaVisualizarPedido().setVisible(true);
+            }
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(TelaGerenciarMesa.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonVerPedidosActionPerformed
 
     private void jButtonFazerPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFazerPedidosActionPerformed
-        // TODO add your handling code here:
-        new FazerPedido().setVisible(true);
+
+        try {
+            if (produtos.listar() != null && GerenciaMesa.getComanda((Integer) NumeroDaMesa.getValue()) != null) {
+                mesa = (Integer) NumeroDaMesa.getValue();//static
+                new TelaFazerPedido().setVisible(true);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "A lista de produtos está vazia \n ou a comanda não foi criada!");
+            }
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(TelaGerenciarMesa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_jButtonFazerPedidosActionPerformed
 
     private void jButtonEncerrarComandaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEncerrarComandaActionPerformed
-        /*Encerrar a comanda*/
-        JOptionPane.showMessageDialog(null, "Comanda encerrada com sucesso. Total: R$ " + "100");
+
+        try {
+            int numero = (int) NumeroDaMesa.getValue();
+            pedido.MesasAtendidas(numero);
+            if (pedido.MesasAtendidas(numero) == false) {
+                JOptionPane.showMessageDialog(null, "A comanda não pode ser encerrada!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Valor toral da comanada R$: " + pedido.valorTotal(numero));
+
+            }
+
+            while (pedido.DeletaComandasFechadas(numero)) {
+                //
+            }
+
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(TelaGerenciarMesa.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }//GEN-LAST:event_jButtonEncerrarComandaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton NovaComanda;
+    private javax.swing.JSpinner NumeroDaMesa;
     private javax.swing.JButton jButtonEncerrarComanda;
     private javax.swing.JButton jButtonFazerPedidos;
-    private javax.swing.JButton jButtonNovaComanda;
     private javax.swing.JButton jButtonVerPedidos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
+
+    public static Integer getMesa() {
+        return mesa;
+    }
 }

@@ -190,6 +190,7 @@ public class CadastroProduto extends javax.swing.JFrame {
         String vnome = nome.getText();
         String vdescricao = descricao.getText();
         float valor = Float.parseFloat(preco.getText());
+     
         
         Produto p = new Produto(vcodigo, vnome, vdescricao, valor);
         

@@ -36,6 +36,16 @@ public class Pedido implements Serializable {
         /*Incrementa o número do pedido*/
         status = false;
     }
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
+    
+    
     /*Getters e Setters*/
     public Produto getProduto() {
         return produto;
@@ -103,6 +113,6 @@ public class Pedido implements Serializable {
     public String toString() {
         String s = isStatus() ? " Pedido atendido! " : " Pedido não atendido! ";
         return quantidade + " <-> " + produto.getNome() + " -> Subtotal: " + getValorTotal()
-                + " ~ N°:" + getNumeroPedido() + " ~ " + s + "\n";
+                + " ~ Número do pedido:" + getNumeroPedido() + " ~ " + s  + "Mesa " + getMesa()+ "\n";
     }
 }

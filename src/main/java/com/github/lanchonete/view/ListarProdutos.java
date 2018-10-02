@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import main.java.com.github.Lanchonete.model.Produto;
 import main.java.com.github.lanchonete.controller.CadastrarProdutoArquivo;
-import main.java.com.github.lanchonete.model.TableProduct;
+import main.java.com.github.lanchonete.model.TabelaProduto;
 
 /**
  *
@@ -25,7 +25,7 @@ public class ListarProdutos extends javax.swing.JFrame {
      */
     
     public CadastrarProdutoArquivo cad = new CadastrarProdutoArquivo();
-    public TableProduct tabela = new TableProduct();
+    public TabelaProduto tabela = new TabelaProduto();
     
     public ListarProdutos() {
         initComponents();
@@ -147,9 +147,7 @@ public class ListarProdutos extends javax.swing.JFrame {
                 cad.deletar(delCodigo);
                 incializarTabela();
 
-            } catch (IOException ex) {
-                Logger.getLogger(ExluirContas.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
+            } catch (IOException | ClassNotFoundException ex) {
                 Logger.getLogger(ExluirContas.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

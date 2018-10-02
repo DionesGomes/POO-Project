@@ -13,7 +13,7 @@ import main.java.com.github.Lanchonete.model.Produto;
  *
  * @author Diones Gomes
  */
-public class TableProduct extends AbstractTableModel{
+public class TabelaProduto extends AbstractTableModel{
     
      private List<Produto> movLista = new ArrayList<>();
     private String [] colunas = {"Código", "Nome", "Descricão", "Preço"};

@@ -5,6 +5,16 @@
  */
 package main.java.com.github.lanchonete.view;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import main.java.com.github.Lanchonete.model.Cozinha;
+import main.java.com.github.Lanchonete.model.Pedido;
+import main.java.com.github.lanchonete.controller.CadastrarPedidosArquivo;
+import main.java.com.github.lanchonete.model.TabelaPedido;
+
 /**
  *
  * @author Diones Gomes
@@ -14,8 +24,12 @@ public class AtenderPedidos extends javax.swing.JFrame {
     /**
      * Creates new form Pedidos
      */
+    CadastrarPedidosArquivo cad = new CadastrarPedidosArquivo();
+    TabelaPedido tab = new TabelaPedido();
+
     public AtenderPedidos() {
         initComponents();
+        incializarTabela();
     }
 
     /**
@@ -28,7 +42,7 @@ public class AtenderPedidos extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        AtenderPedido = new javax.swing.JTable();
         jButtonAtender = new javax.swing.JButton();
         ModificarPedido = new javax.swing.JButton();
         ExcluirPedido = new javax.swing.JButton();
@@ -37,7 +51,7 @@ public class AtenderPedidos extends javax.swing.JFrame {
         setTitle("Pedidos");
         setResizable(false);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        AtenderPedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -57,10 +71,15 @@ public class AtenderPedidos extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(AtenderPedido);
 
         jButtonAtender.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jButtonAtender.setText("Atender ");
+        jButtonAtender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAtenderActionPerformed(evt);
+            }
+        });
 
         ModificarPedido.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         ModificarPedido.setText("Modificar");
@@ -72,6 +91,11 @@ public class AtenderPedidos extends javax.swing.JFrame {
 
         ExcluirPedido.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         ExcluirPedido.setText("Excluir");
+        ExcluirPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExcluirPedidoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -108,15 +132,82 @@ public class AtenderPedidos extends javax.swing.JFrame {
 
     private void ModificarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarPedidoActionPerformed
         // TODO add your handling code here:
-        new EditarPedido().setVisible(true);
+        int linha = AtenderPedido.getSelectedRow();
+        Object mesa = AtenderPedido.getValueAt(linha, 2);
+        int numMesa = Integer.parseInt(mesa.toString());
+
+        new EditarPedido(numMesa).setVisible(true);
+        dispose();
     }//GEN-LAST:event_ModificarPedidoActionPerformed
+
+    private void jButtonAtenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtenderActionPerformed
+        try {
+            // TODO add your handling code here:
+            atender();
+        } catch (IOException ex) {
+            Logger.getLogger(AtenderPedidos.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(AtenderPedidos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonAtenderActionPerformed
+
+    private void ExcluirPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExcluirPedidoActionPerformed
+        deletar();
+    }//GEN-LAST:event_ExcluirPedidoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable AtenderPedido;
     private javax.swing.JButton ExcluirPedido;
     private javax.swing.JButton ModificarPedido;
     private javax.swing.JButton jButtonAtender;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+     private void incializarTabela() {
+        try {
+            List<Pedido> lista = null;
+
+            lista = cad.listar();
+
+            tab.addList(lista);
+            AtenderPedido.setModel(tab);
+        } catch (IOException | ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Falha na conexão com arquivo",
+                    "Mensagem Erro", JOptionPane.ERROR_MESSAGE);
+
+        }
+    }
+
+    private void deletar() {
+        int linha = AtenderPedido.getSelectedRow();
+
+        if (linha >= 0) {
+
+            try {
+
+                Object numeroPedido = AtenderPedido.getValueAt(linha, 3);
+                Object mesa = AtenderPedido.getValueAt(linha, 2);
+                int numPedido = Integer.parseInt(numeroPedido.toString());
+                int numMesa = Integer.parseInt(mesa.toString());
+
+                cad.deletar(numMesa, numPedido);
+                incializarTabela();
+
+            } catch (IOException | ClassNotFoundException ex) {
+                Logger.getLogger(ExluirContas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void atender() throws IOException, ClassNotFoundException {
+
+        int linha = AtenderPedido.getSelectedRow();
+        Object numeroPedido = AtenderPedido.getValueAt(linha, 3);
+        Object mesa = AtenderPedido.getValueAt(linha, 2);
+        int numPedido = Integer.parseInt(numeroPedido.toString());
+        int numMesa = Integer.parseInt(mesa.toString());
+
+        cad.mudarStatus(numPedido, numMesa);
+        incializarTabela();
+    }
 }

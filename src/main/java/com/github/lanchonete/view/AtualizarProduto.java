@@ -190,9 +190,7 @@ public class AtualizarProduto extends javax.swing.JFrame {
             limparTela();
             JOptionPane.showMessageDialog(null, "Produto atualizado com sucesso!");
 
-        } catch (IOException ex) {
-            Logger.getLogger(AtualizarProduto.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException | NumberFormatException ex) {
             Logger.getLogger(AtualizarProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -204,9 +202,7 @@ public class AtualizarProduto extends javax.swing.JFrame {
 
             buscarProduto();
 
-        } catch (IOException ex) {
-            Logger.getLogger(AtualizarProduto.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
+        } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(AtualizarProduto.class.getName()).log(Level.SEVERE, null, ex);
         }
 

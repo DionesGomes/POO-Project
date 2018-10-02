@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import main.java.com.github.Lanchonete.model.Usuario;
 import main.java.com.github.lanchonete.controller.CadastroUsuarioArquivo;
-import main.java.com.github.lanchonete.model.TableUser;
+import main.java.com.github.lanchonete.model.TabelaUsuario;
 
 /**
  *
@@ -24,7 +24,7 @@ public class ExluirContas extends javax.swing.JFrame {
      * Creates new form ExluirContas
      */
     public CadastroUsuarioArquivo cad = new CadastroUsuarioArquivo();
-    public TableUser tabela = new TableUser();
+    public TabelaUsuario tabela = new TabelaUsuario();
 
     public ExluirContas() {
         initComponents();

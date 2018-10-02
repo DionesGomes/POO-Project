@@ -201,12 +201,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     private void jButtonCardapioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCardapioActionPerformed
         // TODO add your handling code here:
-        new GerenciarMenu().setVisible(true);
+        new GerenciarProdutos().setVisible(true);
     }//GEN-LAST:event_jButtonCardapioActionPerformed
 
     private void jButtonGerenciaMesasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGerenciaMesasActionPerformed
         // TODO add your handling code here:
-        new GerenciarMesa().setVisible(true);
+        new TelaGerenciarMesa().setVisible(true);
     }//GEN-LAST:event_jButtonGerenciaMesasActionPerformed
 
     private void jButtonGerenciaContasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGerenciaContasActionPerformed

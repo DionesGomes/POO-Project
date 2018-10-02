@@ -121,7 +121,7 @@ public class Comanda {
      */
     @Override
     public String toString() {
-        String s = data.toString() + " |Mesa:" + mesa + " |N°:" + numeroComanda + "\n==================================\n";
+        String s = data.toString() + " |Mesa:" + mesa + " |Número da Comanda:" + numeroComanda + "\n==================================\n";
         for (Pedido p : comanda) {
             s += p.toString();
         }

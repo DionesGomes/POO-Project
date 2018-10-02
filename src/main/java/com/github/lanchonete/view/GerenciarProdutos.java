@@ -9,12 +9,12 @@ package main.java.com.github.lanchonete.view;
  *
  * @author Diones Gomes
  */
-public class GerenciarMenu extends javax.swing.JFrame {
+public class GerenciarProdutos extends javax.swing.JFrame {
 
     /**
      * Creates new form Menu
      */
-    public GerenciarMenu() {
+    public GerenciarProdutos() {
         initComponents();
     }
 

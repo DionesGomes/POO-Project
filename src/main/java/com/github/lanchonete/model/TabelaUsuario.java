@@ -14,7 +14,7 @@ import main.java.com.github.Lanchonete.model.Usuario;
  *
  * 
  */  
-public class TableUser extends AbstractTableModel{
+public class TabelaUsuario extends AbstractTableModel{
 
     private List<Usuario> movLista = new ArrayList<>();
     private String [] colunas = {"CPF", "Email", "Nome", "Telefone", "Data de Nascimento", "Setor"};

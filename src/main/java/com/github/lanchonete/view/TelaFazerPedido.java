@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,34 +11,32 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import main.java.com.github.Lanchonete.model.Pedido;
 import main.java.com.github.Lanchonete.model.Produto;
-import main.java.com.github.lanchonete.controller.CadastrarPedidosArquivo;
 import main.java.com.github.lanchonete.controller.CadastrarProdutoArquivo;
-import main.java.com.github.lanchonete.controller.GerenciaMenu;
 import main.java.com.github.lanchonete.model.TabelaProduto;
+import main.java.com.github.Lanchonete.controller.GerenciaMesa;
+import main.java.com.github.Lanchonete.model.Pedido;
+import main.java.com.github.lanchonete.controller.CadastrarPedidosArquivo;
+import main.java.com.github.lanchonete.controller.GerenciaMenu;
 
 /**
  *
  * @author Diones Gomes
  */
-public class EditarPedido extends javax.swing.JFrame {
+public class TelaFazerPedido extends javax.swing.JFrame {
 
     /**
-     * Creates new form EditarPedido
+     * Creates new form Pedido
      */
-    CadastrarPedidosArquivo cadPedido = new CadastrarPedidosArquivo();
-    CadastrarProdutoArquivo cadProduto = new CadastrarProdutoArquivo();
-    TabelaProduto tabProduto = new TabelaProduto();
-    int NumeroDaMesa;
-    public EditarPedido() {
+    public CadastrarProdutoArquivo cad = new CadastrarProdutoArquivo();
+    public TabelaProduto tabela = new TabelaProduto();
+    public GerenciaMesa gm = new GerenciaMesa();
+    private int codProduto;
+    private  int quantidade;
+
+    public TelaFazerPedido() {
         initComponents();
-        incializarTabela();         
-    }
-    public EditarPedido(int mesa) {
-        this.NumeroDaMesa = mesa;
-        initComponents();
-        incializarTabela();         
+        incializarTabela();
     }
 
     /**
@@ -58,6 +57,7 @@ public class EditarPedido extends javax.swing.JFrame {
         Tableproduct = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Fazer Pedidos ");
         setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
@@ -67,7 +67,7 @@ public class EditarPedido extends javax.swing.JFrame {
         jLabel2.setText("Quantidade");
 
         FazerPedido.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        FazerPedido.setText("Atualizar");
+        FazerPedido.setText("Pedir");
         FazerPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FazerPedidoActionPerformed(evt);
@@ -160,15 +160,15 @@ public class EditarPedido extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void FazerPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FazerPedidoActionPerformed
 
+    private void FazerPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FazerPedidoActionPerformed
+        
         try {
-            atualizar();
-            dispose();
-            new AtenderPedidos().setVisible(true);
+            pedir();
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(TelaFazerPedido.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_FazerPedidoActionPerformed
 
 
@@ -181,15 +181,15 @@ public class EditarPedido extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
-    
+
     private void incializarTabela() {
         try {
             List<Produto> lista = null;
 
-            lista = cadProduto.listar();
+            lista = cad.listar();
 
-            tabProduto.addList(lista);
-            Tableproduct.setModel(tabProduto);
+            tabela.addList(lista);
+            Tableproduct.setModel(tabela);
         } catch (IOException | ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "Falha na conexão com arquivo",
                     "Mensagem Erro", JOptionPane.ERROR_MESSAGE);
@@ -197,19 +197,33 @@ public class EditarPedido extends javax.swing.JFrame {
         }
     }
 
-    private void atualizar() throws IOException, ClassNotFoundException {
+    private void pedir() throws IOException, ClassNotFoundException {
         int linha = Tableproduct.getSelectedRow();
 
         if (linha >= 0) {
 
             Object codigo = Tableproduct.getValueAt(linha, 0);
-            int codProduto = Integer.parseInt(codigo.toString());
-            int quantidade = (int) QuantidadePedido.getValue(); 
-                     
+            codProduto = Integer.parseInt(codigo.toString());
+            quantidade = (int) QuantidadePedido.getValue(); 
             
-            cadPedido.atualizar(NumeroDaMesa,GerenciaMenu.EscolherProduto(codProduto),quantidade);
+            Pedido p = new Pedido(GerenciaMenu.EscolherProduto(codProduto),quantidade);
+            p.setMesa(TelaGerenciarMesa.getMesa());
+            CadastrarPedidosArquivo cad = new CadastrarPedidosArquivo();
             
-            incializarTabela();         
+            
+            
+            
+            if(cad.Adicionar(p)) {
+            
+                JOptionPane.showMessageDialog(null, "Pedido realizado com sucesso!");
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Pedido não foi efetuado!");                
+                JOptionPane.showMessageDialog(null, "Númeor da mesa"+TelaGerenciarMesa.getMesa());
+                JOptionPane.showMessageDialog(null, "Código produto"+codProduto);
+                JOptionPane.showMessageDialog(null, "Quantidade do produto"+quantidade);
+            }
+             incializarTabela();         
         }
     }
 

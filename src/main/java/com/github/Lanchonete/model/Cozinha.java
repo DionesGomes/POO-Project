@@ -67,7 +67,7 @@ public class Cozinha {
             return false;
         }
         int mesa = pedidos.get(buscar(numeroPedido)).getMesa();//descobre a mesa de um determinado pedido
-        //gm.getComanda(mesa).getPedido(numeroPedido).mudarStatus();// muda o status de não atendido para atendido
+        GerenciaMesa.getComanda(mesa).getPedido(numeroPedido).alterarStatus();// muda o status de não atendido para atendido
         return pedidos.remove(pedidos.get(buscar(numeroPedido)));//remove da cozinha
     }
 

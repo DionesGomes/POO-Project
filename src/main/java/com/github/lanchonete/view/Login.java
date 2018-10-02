@@ -154,7 +154,9 @@ public class Login extends javax.swing.JFrame {
                 TelaPrincipal princiapal = new TelaPrincipal(jTextFieldEmail.getText());
                 princiapal.setVisible(true);
                 //JOptionPane.showMessageDialog(null, "seja bem vindo!");
+              
                 this.dispose();
+                
             } else {
                 JOptionPane.showMessageDialog(null, "Login ou Senha invalido!");
                 /*Setando null, para limpar o campo de password*/
@@ -172,13 +174,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonEntrarActionPerformed
 
     private void jButtonCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelarActionPerformed
-        try {
-            // TODO add your handling code here:
-
-            System.out.println(cad.listar().toString());
-        } catch (IOException | ClassNotFoundException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       
 
 
     }//GEN-LAST:event_jButtonCancelarActionPerformed

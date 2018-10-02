@@ -16,6 +16,7 @@ public class Produto implements Serializable {
     private String nome;
     private String descricao;
     private float preco;
+    //private static int id;
 
     /**
      * Inicializando todos os atributos da classe Produto.
@@ -30,6 +31,7 @@ public class Produto implements Serializable {
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
+        //codigo = ++id;
     }
 
     /*Getters e Setters*/

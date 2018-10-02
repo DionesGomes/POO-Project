@@ -5,6 +5,7 @@
  */
 package main.java.com.github.lanchonete.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import main.java.com.github.Lanchonete.model.Produto;
 
@@ -51,15 +52,14 @@ public class GerenciaMenu {
      *
      * @param codigo o código para especificar o produto.
      * @return um produto ou null
+     * @throws java.io.IOException
+     * @throws java.lang.ClassNotFoundException
      *
      */
-    public static Produto EscolherProduto(int codigo) {
-        for (Produto p : produtos) {
-            if (p.getCodigo() == codigo) {
-                return p;
-            }
-        }
-        return null;
+    public static Produto EscolherProduto(int codigo) throws IOException, ClassNotFoundException {
+        CadastrarProdutoArquivo arquivo = new CadastrarProdutoArquivo();
+        return arquivo.buscar(codigo);
+        
     }
 
     /**
