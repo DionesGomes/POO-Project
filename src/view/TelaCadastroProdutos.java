@@ -171,7 +171,9 @@ public class TelaCadastroProdutos extends javax.swing.JFrame {
             this.dispose();
         } catch (FormularioException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage(), "Mensagem de Erro", JOptionPane.ERROR_MESSAGE);
-        } catch (IOException | ClassNotFoundException ex) {
+        } catch (NumberFormatException ex) {
+           JOptionPane.showMessageDialog(null, "Informe um código válido! \n FORMATO: Números inteiros");
+        }catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(TelaCadastroProdutos.class.getName()).log(Level.SEVERE, null, ex);
         }
 

@@ -216,10 +216,10 @@ public class TelaComandasFechadas extends javax.swing.JFrame {
                 TabelaComandaFechada.setModel(tabela);
             }
 
-        } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(null, "Inválido!");
         } catch (DateTimeParseException ex) {
             JOptionPane.showMessageDialog(null, "Os campos não podem estar vazios!");
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(null, "Inválido!");
         } catch (IOException | ClassNotFoundException ex) {
             JOptionPane.showMessageDialog(null, "Falha na conexão com arquivo",
                     "Mensagem Erro", JOptionPane.ERROR_MESSAGE);

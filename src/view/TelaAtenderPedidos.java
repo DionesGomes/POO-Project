@@ -198,7 +198,7 @@ public class TelaAtenderPedidos extends javax.swing.JFrame {
         if (linha >= 0) {
 
             try {
-
+                
                 Object numeroPedido = AtenderPedido.getValueAt(linha, 3);
                 Object mesa = AtenderPedido.getValueAt(linha, 2);
                 int numPedido = Integer.parseInt(numeroPedido.toString());
@@ -206,7 +206,7 @@ public class TelaAtenderPedidos extends javax.swing.JFrame {
 
                 cad.deletar(numMesa, numPedido);
                 incializarTabela();
-
+                
             } catch (IOException | ClassNotFoundException ex) {
                 Logger.getLogger(TelaExluirContasUsuarios.class.getName()).log(Level.SEVERE, null, ex);
             }

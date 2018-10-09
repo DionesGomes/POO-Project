@@ -60,6 +60,7 @@ public class ProdutosArquivoDAO {
     public boolean Adicionar(Produto produto) throws FileNotFoundException, IOException, ClassNotFoundException {
         List<Produto> produtos;
 
+       
         if (arquivo.length() > 0) {
             ObjectInputStream in = new ObjectInputStream(
                     new FileInputStream(arquivo));
